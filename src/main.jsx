@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-import { ArrowLeft, ArrowRight, ChevronDown, Instagram, Linkedin, Mail, Play, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown, Mail, Play, X } from 'lucide-react';
 import './styles.css';
 
 const ASSET_BASE = 'https://raw.githubusercontent.com/yokeshkannan3d/Yokeshkannan/main';
@@ -47,8 +46,6 @@ function Hero() {
     };
   }, [open]);
 
-  const openReel = () => setOpen(true);
-
   return (
     <>
       <section id="top" className="hero">
@@ -59,7 +56,7 @@ function Hero() {
         <div className="hero-copy">
           <div>
             <h1>JUMP INTO MY <span>WORLD</span></h1>
-            <button className="reel-cta" onClick={openReel}>
+            <button className="reel-cta" onClick={() => setOpen(true)}>
               <span className="play-ring"><Play size={25} fill="currentColor" /></span>
               <span>PLAY SHOW REEL</span>
             </button>
@@ -74,7 +71,7 @@ function Hero() {
         <div className="reel-modal" role="dialog" aria-modal="true" aria-label="Show reel" onClick={() => setOpen(false)}>
           <button className="reel-close" onClick={() => setOpen(false)} aria-label="Close reel"><X size={30} /></button>
           <div className="reel-player" onClick={(e) => e.stopPropagation()}>
-            <video ref={previewRef} autoPlay controls playsInline onLoadedMetadata={(e) => { e.currentTarget.muted = false; e.currentTarget.volume = 1; }}>
+            <video ref={previewRef} autoPlay controls playsInline>
               <source src={REEL} type="video/mp4" />
             </video>
           </div>
@@ -212,10 +209,10 @@ function Contact() {
       <div className="content-narrow">
         <h2>Get in Touch</h2>
         <div className="contact-panel">
-          <a href="https://www.linkedin.com/in/yokesh-kannan" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={34} /></a>
-          <a href="https://www.behance.net/yokeshkannan" target="_blank" rel="noreferrer" aria-label="Behance"><span className="behance">Bē</span></a>
+          <a href="https://www.linkedin.com/in/yokesh-kannan" target="_blank" rel="noreferrer" aria-label="LinkedIn"><span className="social-icon linkedin-icon">in</span></a>
+          <a href="https://www.behance.net/yokeshkannan" target="_blank" rel="noreferrer" aria-label="Behance"><span className="social-icon behance-icon">Bē</span></a>
           <a href="mailto:yokeshkannan3d@gmail.com" aria-label="Email"><Mail size={36} /></a>
-          <a href="#" aria-label="Instagram"><Instagram size={34} /></a>
+          <a href="#" aria-label="Instagram"><span className="social-icon instagram-icon"><span /></span></a>
         </div>
       </div>
     </section>
