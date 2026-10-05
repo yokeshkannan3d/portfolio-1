@@ -95,3 +95,11 @@
 @media (prefers-reduced-motion: reduce) {
   .am-frames { scroll-behavior: auto; }
 }
+
+
+:global(.theme-light) .am{background:#f4f4f1;color:#111}
+:global(.theme-light) .am-title{color:#171717}
+:global(.theme-light) .am-text{color:#171717}
+:global(.theme-light) .am-strip{background:#deded9;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+:global(.theme-light) .am-strip::before{background:linear-gradient(90deg,#f4f4f1 0%,#f4f4f1 12%,rgba(244,244,241,.96) 28%,rgba(244,244,241,.78) 48%,rgba(244,244,241,.34) 72%,rgba(244,244,241,0) 100%)}
+:global(.theme-light) .am-strip::after{background:linear-gradient(270deg,#f4f4f1 0%,#f4f4f1 12%,rgba(244,244,241,.92) 30%,rgba(244,244,241,.62) 52%,rgba(244,244,241,.24) 76%,rgba(244,244,241,0) 100%)}
