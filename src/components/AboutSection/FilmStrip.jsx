@@ -4,13 +4,13 @@ import styles from './AboutSection.module.css';
 
 function SprocketPattern({ position, size }) {
   const patternId = useId().replace(/:/g, '');
-  const patternWidth = 28;
-  const patternHeight = 52;
+  const width = 28;
+  const height = 52;
 
   return (
     <svg
       className={`${styles.sprockets} ${position === 'top' ? styles.sprocketsTop : styles.sprocketsBottom}`}
-      viewBox={`0 0 ${patternWidth} ${patternHeight}`}
+      viewBox={`0 0 ${width} ${height}`}
       preserveAspectRatio="none"
       style={{ '--sprocket-size': size }}
       aria-hidden="true"
@@ -18,14 +18,25 @@ function SprocketPattern({ position, size }) {
       <defs>
         <pattern
           id={`sprocket-${position}-${patternId}`}
-          width={patternWidth}
-          height={patternHeight}
+          width={width}
+          height={height}
           patternUnits="userSpaceOnUse"
         >
-          <rect x="0" y="21" width="14" height="10" rx="4" fill="var(--section-bg)" />
+          <rect
+            x="0"
+            y="21"
+            width="14"
+            height="10"
+            rx="4"
+            fill="var(--section-bg)"
+          />
         </pattern>
       </defs>
-      <rect width="100%" height="100%" fill={`url(#sprocket-${position}-${patternId})`} />
+      <rect
+        width="100%"
+        height="100%"
+        fill={`url(#sprocket-${position}-${patternId})`}
+      />
     </svg>
   );
 }
@@ -39,15 +50,23 @@ export default function FilmStrip({
   return (
     <div
       className={`${styles.filmStrip} ${variant === 'background' ? styles.backgroundStrip : ''}`}
-      style={{ '--strip-height': height, '--sprocket-size': sprocketSize }}
+      style={{
+        '--strip-height': height,
+        '--sprocket-size': sprocketSize,
+      }}
     >
       <div className={styles.stripBody}>
         <SprocketPattern position="top" size={sprocketSize} />
+
         <div className={styles.frameTrack}>
           {frames.map((frame, index) => (
-            <FilmFrame key={`${frame.src || 'frame'}-${index}`} {...frame} />
+            <FilmFrame
+              key={`${frame.src || 'frame'}-${index}`}
+              {...frame}
+            />
           ))}
         </div>
+
         <SprocketPattern position="bottom" size={sprocketSize} />
       </div>
     </div>
