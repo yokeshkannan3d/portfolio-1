@@ -3,6 +3,13 @@
 .aboutSection {
   --section-bg: #000;
   --strip-body: #1a1a1a;
+  --strip-radius: 4px;
+  --strip-height: 280px;
+  --strip-translate-y: 0px;
+  --strip-hole-color: var(--section-bg);
+  --strip-hole-width: 14px;
+  --strip-hole-height: 10px;
+  --strip-hole-gap: 14px;
   --strip-border: rgba(255, 255, 255, 0.1);
 
   /* Reference tuning */
@@ -126,7 +133,7 @@
   gap: var(--frame-gap);
   width: max-content;
   height: 100%;
-  padding: 8px 0;
+  padding: var(--strip-hole-height) 0;
 }
 
 .frame {
@@ -252,7 +259,7 @@
     min-height: 820px;
     --section-padding-x: 24px;
     --section-padding-y: 56px;
-    --strip-height: 300px;
+    --strip-height: 280px;
     --sprocket-size: clamp(28px, 7vw, 32px);
     --sprocket-hole-width: 11px;
     --sprocket-hole-height: 8px;
