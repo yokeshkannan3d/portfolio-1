@@ -54,15 +54,35 @@ function Hero() {
 }
 
 function FilmStrip() {
-  const holes = Array.from({ length: 10 });
-  return <div className="film-primary"><div className="film-track">{holes.map((_, i) => <span key={`t-${i}`} />)}</div><div className="film-image-frame"><img src={ABOUT_IMAGE} alt="Yokesh on set" /></div><div className="film-track">{holes.map((_, i) => <span key={`b-${i}`} />)}</div></div>;
-}
-function DiagonalFilm() {
-  const holes = Array.from({ length: 15 });
-  return <div className="film-diagonal" aria-hidden="true"><div className="diagonal-body"><div className="film-track">{holes.map((_, i) => <span key={i} />)}</div><div className="diagonal-empty" /><div className="film-track">{holes.map((_, i) => <span key={`b-${i}`} />)}</div></div></div>;
+  const holes = Array.from({ length: 9 });
+  const HoleRow = ({ className, prefix }) => (
+    <div className={`about-hole-row ${className}`}>
+      {holes.map((_, i) => <span key={`${prefix}-${i}`} />)}
+    </div>
+  );
+
+  return (
+    <div className="about-film" aria-hidden="true">
+      <HoleRow className="about-hole-row-top" prefix="top" />
+      <div className="about-film-window about-film-window-edge-left"><img src={ABOUT_IMAGE} alt="" /></div>
+      <div className="about-film-window about-film-window-left"><img src={ABOUT_IMAGE} alt="" /></div>
+      <div className="about-film-window about-film-window-right"><img src={ABOUT_IMAGE} alt="" /></div>
+      <div className="about-film-window about-film-window-edge-right"><img src={ABOUT_IMAGE} alt="" /></div>
+      <HoleRow className="about-hole-row-bottom" prefix="bottom" />
+    </div>
+  );
 }
 function About() {
-  return <section id="about" className="about section-shell"><DiagonalFilm /><div className="about-inner"><div className="about-copy"><h2>About me</h2><p>{BIO}</p></div><FilmStrip /></div></section>;
+  return (
+    <section id="about" className="about section-shell">
+      <div className="about-film-stage" aria-hidden="true" />
+      <div className="about-copy">
+        <h2>About me</h2>
+        <p>{BIO}</p>
+      </div>
+      <FilmStrip />
+    </section>
+  );
 }
 function WorkCard({ work, onOpen }) {
   return <button className="work-card" onClick={() => onOpen(work)} aria-label={`Open ${work.title}`}>{work.image ? <img src={work.image} alt="" /> : <div className="placeholder-art"><span>{String(work.id).padStart(2, '0')}</span><small>PROJECT PLACEHOLDER</small></div>}<span className="work-label">{work.title}</span></button>;
