@@ -23,7 +23,6 @@
 .am-strip {
   position: relative;
   padding: clamp(10px, 1.6vw, 22px) 0;
-  /* Solid charcoal keeps the rear echo completely hidden behind the main strip. */
   background: #161616;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.03);
   border-radius: 6px 0 0 6px;
@@ -32,8 +31,6 @@
   overflow: hidden;
 }
 
-/* Opaque feathering: these overlays darken the strip edges instead of
-   making the strip transparent, so the echo can never show through it. */
 .am-strip::before,
 .am-strip::after {
   content: "";
@@ -47,30 +44,45 @@
 .am-strip::before {
   left: 0;
   width: 30%;
-  background: linear-gradient(
-    90deg,
-    #000 0%,
-    #000 12%,
-    rgba(0,0,0,0.96) 28%,
-    rgba(0,0,0,0.78) 48%,
-    rgba(0,0,0,0.34) 72%,
-    rgba(0,0,0,0) 100%
-  );
+  background: linear-gradient(90deg,#000 0%,#000 12%,rgba(0,0,0,0.96) 28%,rgba(0,0,0,0.78) 48%,rgba(0,0,0,0.34) 72%,rgba(0,0,0,0) 100%);
 }
 
 .am-strip::after {
   right: 0;
   width: 24%;
-  background: linear-gradient(
-    270deg,
-    #000 0%,
-    #000 12%,
-    rgba(0,0,0,0.92) 30%,
-    rgba(0,0,0,0.62) 52%,
-    rgba(0,0,0,0.24) 76%,
-    rgba(0,0,0,0) 100%
-  );
+  background: linear-gradient(270deg,#000 0%,#000 12%,rgba(0,0,0,0.92) 30%,rgba(0,0,0,0.62) 52%,rgba(0,0,0,0.24) 76%,rgba(0,0,0,0) 100%);
 }
+
+/* Extra film-strip square details on the right edge, above and below the frames. */
+.am-right-boxes {
+  position: absolute;
+  top: 0;
+  right: clamp(10px, 1.5vw, 22px);
+  bottom: 0;
+  width: clamp(80px, 11vw, 150px);
+  z-index: 7;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(10px, 1.6vw, 22px) 0;
+}
+.am-right-box-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: clamp(6px, 0.7vw, 10px);
+}
+.am-right-box-row span {
+  width: clamp(18px, 2.4vw, 32px);
+  height: clamp(18px, 2.4vw, 32px);
+  border-radius: 6px;
+  background: #bdbdbd;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+.am-right-box-row span:nth-child(1) { opacity: .55; }
+.am-right-box-row span:nth-child(2) { opacity: .72; }
+.am-right-box-row span:nth-child(3) { opacity: .86; }
+.am-right-box-row span:nth-child(4) { opacity: 1; }
 
 .am-holes { display: flex; gap: clamp(8px, 1.1vw, 14px); padding-left: clamp(0px, 0.5vw, 8px); overflow: hidden; }
 .am-holes span { flex: 0 0 clamp(18px, 2.7vw, 38px); height: clamp(18px, 2.7vw, 36px); border-radius: 8px; }
@@ -91,12 +103,12 @@
   .am-grid { grid-template-columns: 1fr; gap: 32px; }
   .am-text { max-width: none; }
   .am-echo { --sx: 1.2; --sy: 0.8; transform: rotate(-20deg) scale(var(--sx), var(--sy)); }
+  .am-right-boxes { right: 8px; width: 90px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .am-frames { scroll-behavior: auto; }
 }
-
 
 :global(.theme-light) .am{background:#f4f4f1;color:#111}
 :global(.theme-light) .am-title{color:#171717}
@@ -104,3 +116,4 @@
 :global(.theme-light) .am-strip{background:#deded9;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 :global(.theme-light) .am-strip::before{background:linear-gradient(90deg,#f4f4f1 0%,#f4f4f1 12%,rgba(244,244,241,.96) 28%,rgba(244,244,241,.78) 48%,rgba(244,244,241,.34) 72%,rgba(244,244,241,0) 100%)}
 :global(.theme-light) .am-strip::after{background:linear-gradient(270deg,#f4f4f1 0%,#f4f4f1 12%,rgba(244,244,241,.92) 30%,rgba(244,244,241,.62) 52%,rgba(244,244,241,.24) 76%,rgba(244,244,241,0) 100%)}
+:global(.theme-light) .am-right-box-row span{background:#8f8f8f;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
