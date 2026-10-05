@@ -107,3 +107,30 @@
 .am-stage > .am-strip {
   z-index: 3;
 }
+
+
+/* Feathered black cover on the right keeps the angled echo hidden there too. */
+.am-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  right: -2%;
+  top: -12%;
+  bottom: -12%;
+  width: 58%;
+  background: linear-gradient(
+    270deg,
+    #000 0%,
+    #000 38%,
+    rgba(0,0,0,0.98) 52%,
+    rgba(0,0,0,0.82) 66%,
+    rgba(0,0,0,0.42) 80%,
+    transparent 100%
+  );
+  filter: blur(14px);
+}
+
+.am-stage > .am-strip {
+  z-index: 3;
+}
