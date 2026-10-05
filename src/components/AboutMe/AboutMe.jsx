@@ -25,12 +25,26 @@ function Sprockets() {
   );
 }
 
+function RightBoxes() {
+  return (
+    <div className={styles["am-right-boxes"]} aria-hidden="true">
+      <div className={styles["am-right-box-row"]}>
+        {Array.from({ length: 4 }, (_, i) => <span key={`top-${i}`} />)}
+      </div>
+      <div className={`${styles["am-right-box-row"]} ${styles["am-right-box-row-bottom"]}`}>
+        {Array.from({ length: 4 }, (_, i) => <span key={`bottom-${i}`} />)}
+      </div>
+    </div>
+  );
+}
+
 function Strip({ slides }) {
   const last = slides[slides.length - 1];
 
   return (
     <div className={styles["am-strip"]}>
       <Sprockets />
+      <RightBoxes />
       <ul className={styles["am-frames"]} aria-label="Photos">
         <li className={`${styles["am-frame"]} ${styles["am-ghost"]}`} aria-hidden="true">
           {last?.src ? <img src={last.src} alt="" draggable="false" /> : <div className={styles["am-ph"]} />}
