@@ -5,13 +5,11 @@ export default function FilmFrame({ src, type = 'image', peek = false }) {
   const videoRef = useRef(null);
 
   const handleEnter = () => {
-    if (type !== 'video' || !videoRef.current) return;
-    videoRef.current.play().catch(() => {});
+    if (type === 'video') videoRef.current?.play().catch(() => {});
   };
 
   const handleLeave = () => {
-    if (type !== 'video' || !videoRef.current) return;
-    videoRef.current.pause();
+    if (type === 'video') videoRef.current?.pause();
   };
 
   return (
