@@ -23,11 +23,6 @@ export default function AboutSection({
       />
 
       <div className={styles.aboutContent}>
-        <div className={styles.copy}>
-          <h2>{title}</h2>
-          <p>{body}</p>
-        </div>
-
         <div className={styles.mainStripArea}>
           <FilmStrip frames={frames} variant="main" />
         </div>
