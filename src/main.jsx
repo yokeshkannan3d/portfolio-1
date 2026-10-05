@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client';
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronDown, Mail, Moon, Play, Sun, X } from 'lucide-react';
 import './styles.css';
+import './work-alignment.css';
 import AboutMe from "./components/AboutMe/AboutMe.jsx";
 
 const ASSET_BASE = 'https://raw.githubusercontent.com/yokeshkannan3d/Yokeshkannan/main';
