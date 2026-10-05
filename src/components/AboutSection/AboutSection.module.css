@@ -49,6 +49,7 @@
 }
 
 .backgroundLayer {
+  display: none;
   position: absolute;
   z-index: 1;
   inset: 0;
