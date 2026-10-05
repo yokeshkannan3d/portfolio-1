@@ -12,10 +12,7 @@ export default function AboutSection({
   peekMedia,
   backgroundMedia,
 }) {
-  const frames = [
-    { src: mainMedia, type: 'image' },
-    { src: peekMedia || mainMedia, type: 'image', peek: true },
-  ];
+  const frames = [{ src: mainMedia, type: 'image' }];
 
   return (
     <section id="about" className={styles.aboutSection}>
