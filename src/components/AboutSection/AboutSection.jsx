@@ -3,7 +3,7 @@ import FilmStrip from './FilmStrip.jsx';
 import styles from './AboutSection.module.css';
 
 const DEFAULT_BODY =
-  "Lorem Ipsum is simply dummy text of the printing and typesetting industry…";
+  'Lorem Ipsum is simply dummy text of the printing and typesetting industry…';
 
 export default function AboutSection({
   title = 'About me',
@@ -27,14 +27,14 @@ export default function AboutSection({
         />
       </div>
 
-      <div className={styles.mainStripArea}>
+      <div className={styles.mainStripArea} aria-hidden="true">
         <FilmStrip
           frames={frames}
           height="var(--strip-height)"
           sprocketSize="var(--sprocket-size)"
         />
-        <span className={`${styles.feather} ${styles.featherLeft}`} aria-hidden="true" />
-        <span className={`${styles.feather} ${styles.featherRight}`} aria-hidden="true" />
+        <span className={`${styles.feather} ${styles.featherLeft}`} />
+        <span className={`${styles.feather} ${styles.featherRight}`} />
       </div>
 
       <div className={styles.content}>
