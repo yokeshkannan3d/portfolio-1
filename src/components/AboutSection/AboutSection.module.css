@@ -3,75 +3,91 @@
 .aboutSection {
   --section-bg: #000;
   --strip-body: #1a1a1a;
-  --strip-border: rgba(255,255,255,.10);
-  --strip-height: clamp(330px, 38vw, 545px);
-  --frame-height: calc(var(--strip-height) - (var(--sprocket-size) * 2) - 18px);
-  --frame-width: clamp(420px, 50vw, 700px);
-  --frame-gap: 18px;
-  --sprocket-size: clamp(36px, 4vw, 52px);
-  --background-strip-height: clamp(260px, 30vw, 430px);
-  --background-sprocket-size: clamp(24px, 3vw, 38px);
+  --strip-border: rgba(255, 255, 255, 0.1);
+
+  /* Main tunable values */
+  --section-padding-y: 64px;
+  --section-padding-x: 48px;
+  --title-size: clamp(32px, 3.5vw, 36px);
+  --body-size: clamp(14px, 1.1vw, 15px);
+  --body-max-width: 420px;
+
+  --strip-height: clamp(270px, 31vw, 420px);
+  --frame-height: calc(var(--strip-height) - (var(--sprocket-size) * 2) - 16px);
+  --frame-width: clamp(520px, 45vw, 760px);
+  --frame-gap: 14px;
+  --sprocket-size: clamp(34px, 4vw, 46px);
+  --sprocket-hole-width: 14px;
+  --sprocket-hole-height: 10px;
+
+  --background-strip-height: clamp(250px, 29vw, 390px);
+  --background-sprocket-size: clamp(24px, 3vw, 34px);
   --background-rotation: -23deg;
-  --background-opacity: .11;
+  --background-opacity: 0.11;
+
   --feather-width: clamp(120px, 11vw, 160px);
-  --strip-top: clamp(210px, 21vw, 300px);
+  --peek-percentage: 20%;
   --strip-drift: 3px;
 
   position: relative;
-  min-height: 1052px;
+  min-height: 650px;
   overflow: hidden;
   background: var(--section-bg);
   isolation: isolate;
+  color: #fff;
 }
 
 .backgroundLayer,
 .mainStripArea,
-.feather,
-.content {
+.content,
+.feather {
   position: absolute;
 }
 
 .backgroundLayer {
   z-index: 1;
-  width: 1500px;
+  width: min(1500px, 125vw);
   height: var(--background-strip-height);
-  left: 30%;
-  top: 410px;
+  left: 35%;
+  top: 55%;
   opacity: var(--background-opacity);
-  filter: blur(1.5px) grayscale(.35);
-  transform: rotate(var(--background-rotation));
+  filter: blur(1.5px) grayscale(0.35);
+  transform: translate(-50%, -50%) rotate(var(--background-rotation));
   pointer-events: none;
 }
 
 .content {
   z-index: 4;
   inset: 0;
+  pointer-events: none;
 }
 
 .copy {
   position: absolute;
-  left: clamp(48px, 9vw, 129px);
-  top: 96px;
-  width: min(40%, 615px);
-  color: #fff;
+  left: var(--section-padding-x);
+  top: 50%;
+  width: 40%;
+  max-width: 520px;
+  transform: translateY(-50%);
+  pointer-events: auto;
 }
 
 .copy h2 {
   margin: 0;
   color: #fff;
   font-family: Inter, Arial, sans-serif;
-  font-size: clamp(32px, 3.2vw, 64px);
+  font-size: var(--title-size);
   line-height: 1.1;
   font-weight: 700;
-  letter-spacing: -.04em;
+  letter-spacing: -0.035em;
 }
 
 .copy p {
   margin: 24px 0 0;
-  max-width: 420px;
-  color: rgba(255,255,255,.9);
+  max-width: var(--body-max-width);
+  color: rgba(255, 255, 255, 0.9);
   font-family: Inter, Arial, sans-serif;
-  font-size: clamp(14px, 1.15vw, 16px);
+  font-size: var(--body-size);
   line-height: 1.6;
   font-weight: 400;
 }
@@ -79,18 +95,20 @@
 .mainStripArea {
   z-index: 2;
   left: 40%;
-  right: -25vw;
-  top: var(--strip-top);
+  right: -24vw;
+  top: 50%;
   height: var(--strip-height);
+  transform: translateY(-50%);
   min-width: 0;
-  filter: drop-shadow(0 20px 60px rgba(0,0,0,.6));
+  filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.6));
+  pointer-events: none;
 }
 
 .filmStrip {
   position: relative;
   width: 100%;
   height: var(--strip-height);
-  min-width: 720px;
+  min-width: 880px;
   animation: filmDrift 8s ease-in-out infinite alternate;
 }
 
@@ -107,7 +125,9 @@
   border: 1px solid var(--strip-border);
   border-radius: 4px;
   background: var(--strip-body);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), inset 0 -1px 0 rgba(0,0,0,.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.75);
 }
 
 .sprockets {
@@ -138,7 +158,7 @@
   overflow: hidden;
   border-radius: 6px;
   background: #0c0c0c;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .frame img,
@@ -150,13 +170,16 @@
 }
 
 .peekFrame {
-  width: clamp(220px, 24vw, 330px);
-  flex-basis: clamp(220px, 24vw, 330px);
-  opacity: .6;
+  width: var(--peek-frame-width);
+  flex-basis: var(--peek-frame-width);
+  opacity: 0.6;
+}
+
+.mainStripArea {
+  --peek-frame-width: calc(var(--frame-width) * var(--peek-percentage) / 100);
 }
 
 .feather {
-  position: absolute;
   z-index: 3;
   top: -1px;
   bottom: -1px;
@@ -166,12 +189,22 @@
 
 .featherLeft {
   left: 0;
-  background: linear-gradient(to right, #000 0%, rgba(0,0,0,.85) 30%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(
+    to right,
+    #000 0%,
+    rgba(0, 0, 0, 0.85) 30%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .featherRight {
   right: 0;
-  background: linear-gradient(to left, #000 0%, rgba(0,0,0,.85) 30%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(
+    to left,
+    #000 0%,
+    rgba(0, 0, 0, 0.85) 30%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 @keyframes filmDrift {
@@ -180,22 +213,39 @@
 }
 
 @media (max-width: 1023px) {
-  .aboutSection { min-height: 900px; }
-  .copy { left: 48px; width: 45%; }
-  .mainStripArea { left: 42%; right: -35vw; }
-  .backgroundLayer { left: 18%; top: 420px; }
+  .aboutSection {
+    --section-padding-x: 36px;
+    --strip-height: clamp(250px, 34vw, 360px);
+  }
+
+  .copy {
+    width: 45%;
+  }
+
+  .mainStripArea {
+    left: 43%;
+    right: -32vw;
+  }
+
+  .backgroundLayer {
+    left: 24%;
+    top: 57%;
+  }
 }
 
 @media (max-width: 767px) {
   .aboutSection {
-    min-height: 860px;
-    --strip-height: 310px;
-    --sprocket-size: 30px;
+    min-height: 820px;
+    --section-padding-x: 24px;
+    --section-padding-y: 56px;
+    --strip-height: 300px;
+    --sprocket-size: clamp(28px, 8vw, 32px);
+    --sprocket-hole-width: 11px;
+    --sprocket-hole-height: 8px;
     --frame-width: min(78vw, 520px);
-    --frame-height: 245px;
-    --background-strip-height: 250px;
+    --frame-height: calc(var(--strip-height) - (var(--sprocket-size) * 2) - 16px);
+    --background-strip-height: 240px;
     --background-sprocket-size: 24px;
-    --strip-top: 500px;
   }
 
   .copy {
@@ -203,29 +253,41 @@
     left: auto;
     top: auto;
     width: auto;
-    padding: 64px 24px 0;
+    max-width: none;
+    padding: var(--section-padding-y) var(--section-padding-x) 0;
+    transform: none;
   }
-
-  .copy h2 { font-size: clamp(32px, 9vw, 42px); }
-  .copy p { max-width: 100%; font-size: 14px; margin-top: 24px; }
 
   .mainStripArea {
     left: 0;
-    right: -22vw;
-    top: var(--strip-top);
+    right: -20vw;
+    top: auto;
+    bottom: 52px;
+    height: var(--strip-height);
+    transform: none;
   }
 
-  .filmStrip { min-width: 760px; }
-  .backgroundLayer { left: 5%; top: 430px; transform: rotate(-20deg) scale(.8); }
+  .filmStrip {
+    min-width: 760px;
+  }
+
+  .backgroundLayer {
+    left: 10%;
+    top: 64%;
+    transform: translate(-50%, -50%) rotate(-20deg) scale(0.8);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .filmStrip { animation: none; }
+  .filmStrip {
+    animation: none;
+  }
 }
 
-/* Pixel-accurate tuning notes:
-   --background-rotation controls the faint diagonal strip.
-   --background-opacity controls its contrast.
-   --feather-width controls the black fade at both ends.
-   --peek percentage is controlled by --frame-width and the .peekFrame width.
+/*
+Tuning:
+- --background-rotation: faint diagonal strip angle.
+- --background-opacity: background strip contrast.
+- --feather-width: black fade width at both ends.
+- --peek-percentage: visible width relationship of the second frame.
 */
