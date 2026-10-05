@@ -61,6 +61,7 @@ function About() {
       body={BIO}
       mainMedia={ABOUT_IMAGE}
       peekMedia={ABOUT_IMAGE}
+      backgroundMedia={ABOUT_IMAGE}
     />
   );
 }
