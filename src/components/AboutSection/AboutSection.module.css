@@ -53,8 +53,8 @@
   z-index: 1;
   inset: 0;
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-position: center center;
+  background-size: 100% auto;
   opacity: 1;
   filter: none;
   pointer-events: none;
@@ -285,7 +285,7 @@
 
   .backgroundLayer {
     background-position: center center;
-    background-size: auto 100%;
+    background-size: 100% auto;
   }
 }
 
