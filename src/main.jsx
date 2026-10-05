@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowLeft, ArrowRight, ChevronDown, Mail, Play, X } from 'lucide-react';
 import './styles.css';
-import AboutSection from './components/AboutSection/AboutSection.jsx';
+import AboutMe from "./components/AboutMe/AboutMe.jsx";
 
 const ASSET_BASE = 'https://raw.githubusercontent.com/yokeshkannan3d/Yokeshkannan/main';
 const ABOUT_IMAGE = `${ASSET_BASE}/public/images/about-film.jpg`;
@@ -56,13 +56,7 @@ function Hero() {
 
 function About() {
   return (
-    <AboutSection
-      title="About me"
-      body={BIO}
-      mainMedia={ABOUT_IMAGE}
-      peekMedia={ABOUT_IMAGE}
-      backgroundMedia={ABOUT_IMAGE}
-    />
+    <AboutMe />
   );
 }
 function WorkCard({ work, onOpen }) {
