@@ -2,33 +2,31 @@ import React, { useId } from 'react';
 import FilmFrame from './FilmFrame.jsx';
 import styles from './AboutSection.module.css';
 
-function SprocketPattern({ position, size }) {
+function SprocketPattern({ position }) {
   const patternId = useId().replace(/:/g, '');
-  const width = 24;
-  const height = 52;
+  const patternWidth = 28;
 
   return (
     <svg
-      className={`${styles.sprockets} ${position === 'top' ? styles.sprocketsTop : styles.sprocketsBottom}`}
-      viewBox={`0 0 ${width} ${height}`}
+      className={styles.sprockets}
+      viewBox={`0 0 ${patternWidth} 10`}
       preserveAspectRatio="none"
-      style={{ '--sprocket-size': size }}
       aria-hidden="true"
     >
       <defs>
         <pattern
           id={`sprocket-${position}-${patternId}`}
-          width={width}
-          height={height}
+          width={patternWidth}
+          height="10"
           patternUnits="userSpaceOnUse"
         >
           <rect
             x="0"
-            y="21"
+            y="0"
             width="14"
             height="10"
             rx="4"
-            fill="var(--section-bg)"
+            fill="var(--strip-hole-color)"
           />
         </pattern>
       </defs>
@@ -44,30 +42,28 @@ function SprocketPattern({ position, size }) {
 export default function FilmStrip({
   frames = [],
   height = 'var(--strip-height)',
-  sprocketSize = 'var(--sprocket-size)',
   variant = 'main',
 }) {
   return (
     <div
-      className={`${styles.filmStrip} ${variant === 'background' ? styles.backgroundStrip : ''}`}
-      style={{
-        '--strip-height': height,
-        '--sprocket-size': sprocketSize,
-      }}
+      className={`${styles.filmStripWrapper} ${
+        variant === 'background' ? styles.backgroundStrip : ''
+      }`}
+      style={{ '--strip-height': height }}
     >
-      <div className={styles.stripBody}>
-        <SprocketPattern position="top" size={sprocketSize} />
-
-        <div className={styles.frameTrack}>
-          {frames.map((frame, index) => (
-            <FilmFrame
-              key={`${frame.src || 'frame'}-${index}`}
-              {...frame}
-            />
-          ))}
+      <div className={styles.filmStrip}>
+        <div className={styles.stripBody}>
+          <SprocketPattern position="top" />
+          <div className={styles.frameTrack}>
+            {frames.map((frame, index) => (
+              <FilmFrame
+                key={`${frame.src || 'frame'}-${index}`}
+                {...frame}
+              />
+            ))}
+          </div>
+          <SprocketPattern position="bottom" />
         </div>
-
-        <SprocketPattern position="bottom" size={sprocketSize} />
       </div>
     </div>
   );
