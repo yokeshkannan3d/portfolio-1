@@ -1,12 +1,10 @@
-/* Align Milestones and Get in Touch to the same horizontal content edges as About Me. */
-.milestones,
-.contact {
+/* Milestones: use About Me's exact horizontal content edges as the reference. */
+.milestones {
   padding-left: clamp(20px, 9vw, 100px);
   padding-right: clamp(20px, 9vw, 100px);
 }
 
-.milestones .content-narrow,
-.contact .content-narrow {
+.milestones .content-narrow {
   width: 100%;
   max-width: none;
   margin-left: 0;
@@ -14,8 +12,7 @@
 }
 
 @media (max-width: 700px) {
-  .milestones,
-  .contact {
+  .milestones {
     padding-left: 20px;
     padding-right: 20px;
   }
