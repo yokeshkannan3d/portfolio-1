@@ -27,9 +27,8 @@ const WORK_CATEGORIES = [
       { title: 'Car Model', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/car.jpg' }
     ]}
   ], works: []},
-  { id: 'motion', title: 'Motion Graphics', subtitle: 'Motion design, animation & kinetic visuals', image: `${ASSET_BASE}/public/images/work-3.svg`, works: [
-    { title: 'Motion Graphics — Work 01', image: `${ASSET_BASE}/public/images/work-3.svg` },
-    { title: 'Motion Graphics — Work 02', image: null }, { title: 'Motion Graphics — Work 03', image: null },
+  { id: 'motion', title: '3D Animation', subtitle: 'Character animation, walk cycles & motion studies', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif', works: [
+    { title: 'Walk Cycle', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif' },
   ]},
 ];
 
