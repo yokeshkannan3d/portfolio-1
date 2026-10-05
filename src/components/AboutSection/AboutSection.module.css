@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.aboutSection {
+  --section-bg: #000;
+  --strip-body: #1a1a1a;
+  --strip-border: rgba(255,255,255,.10);
+  --strip-height: clamp(330px, 38vw, 545px);
+  --frame-height: calc(var(--strip-height) - (var(--sprocket-size) * 2) - 18px);
+  --frame-width: clamp(420px, 50vw, 700px);
+  --frame-gap: 18px;
+  --sprocket-size: clamp(36px, 4vw, 52px);
+  --background-strip-height: clamp(260px, 30vw, 430px);
+  --background-sprocket-size: clamp(24px, 3vw, 38px);
+  --background-rotation: -23deg;
+  --background-opacity: .11;
+  --feather-width: clamp(120px, 11vw, 160px);
+  --strip-top: clamp(210px, 21vw, 300px);
+  --strip-drift: 3px;
+
+  position: relative;
+  min-height: 1052px;
+  overflow: hidden;
+  background: var(--section-bg);
+  isolation: isolate;
+}
+
+.backgroundLayer,
+.mainStripArea,
+.feather,
+.content {
+  position: absolute;
+}
+
+.backgroundLayer {
+  z-index: 1;
+  width: 1500px;
+  height: var(--background-strip-height);
+  left: 30%;
+  top: 410px;
+  opacity: var(--background-opacity);
+  filter: blur(1.5px) grayscale(.35);
+  transform: rotate(var(--background-rotation));
+  pointer-events: none;
+}
+
+.content {
+  z-index: 4;
+  inset: 0;
+}
+
+.copy {
+  position: absolute;
+  left: clamp(48px, 9vw, 129px);
+  top: 96px;
+  width: min(40%, 615px);
+  color: #fff;
+}
+
+.copy h2 {
+  margin: 0;
+  color: #fff;
+  font-family: Inter, Arial, sans-serif;
+  font-size: clamp(32px, 3.2vw, 64px);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -.04em;
+}
+
+.copy p {
+  margin: 24px 0 0;
+  max-width: 420px;
+  color: rgba(255,255,255,.9);
+  font-family: Inter, Arial, sans-serif;
+  font-size: clamp(14px, 1.15vw, 16px);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.mainStripArea {
+  z-index: 2;
+  left: 40%;
+  right: -25vw;
+  top: var(--strip-top);
+  height: var(--strip-height);
+  min-width: 0;
+  filter: drop-shadow(0 20px 60px rgba(0,0,0,.6));
+}
+
+.filmStrip {
+  position: relative;
+  width: 100%;
+  height: var(--strip-height);
+  min-width: 720px;
+  animation: filmDrift 8s ease-in-out infinite alternate;
+}
+
+.backgroundStrip {
+  min-width: 1100px;
+  animation: none;
+}
+
+.stripBody {
+  position: absolute;
+  inset: 0;
+  padding: var(--sprocket-size) 0;
+  overflow: hidden;
+  border: 1px solid var(--strip-border);
+  border-radius: 4px;
+  background: var(--strip-body);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), inset 0 -1px 0 rgba(0,0,0,.7);
+}
+
+.sprockets {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--sprocket-size);
+  display: block;
+  pointer-events: none;
+}
+
+.sprocketsTop { top: 0; }
+.sprocketsBottom { bottom: 0; transform: rotate(180deg); }
+
+.frameTrack {
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: var(--frame-gap);
+  padding: 8px 0;
+  width: max-content;
+}
+
+.frame {
+  width: var(--frame-width);
+  height: var(--frame-height);
+  flex: 0 0 var(--frame-width);
+  overflow: hidden;
+  border-radius: 6px;
+  background: #0c0c0c;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+.frame img,
+.frame video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.peekFrame {
+  width: clamp(220px, 24vw, 330px);
+  flex-basis: clamp(220px, 24vw, 330px);
+  opacity: .6;
+}
+
+.feather {
+  position: absolute;
+  z-index: 3;
+  top: -1px;
+  bottom: -1px;
+  width: var(--feather-width);
+  pointer-events: none;
+}
+
+.featherLeft {
+  left: 0;
+  background: linear-gradient(to right, #000 0%, rgba(0,0,0,.85) 30%, rgba(0,0,0,0) 100%);
+}
+
+.featherRight {
+  right: 0;
+  background: linear-gradient(to left, #000 0%, rgba(0,0,0,.85) 30%, rgba(0,0,0,0) 100%);
+}
+
+@keyframes filmDrift {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--strip-drift)); }
+}
+
+@media (max-width: 1023px) {
+  .aboutSection { min-height: 900px; }
+  .copy { left: 48px; width: 45%; }
+  .mainStripArea { left: 42%; right: -35vw; }
+  .backgroundLayer { left: 18%; top: 420px; }
+}
+
+@media (max-width: 767px) {
+  .aboutSection {
+    min-height: 860px;
+    --strip-height: 310px;
+    --sprocket-size: 30px;
+    --frame-width: min(78vw, 520px);
+    --frame-height: 245px;
+    --background-strip-height: 250px;
+    --background-sprocket-size: 24px;
+    --strip-top: 500px;
+  }
+
+  .copy {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    padding: 64px 24px 0;
+  }
+
+  .copy h2 { font-size: clamp(32px, 9vw, 42px); }
+  .copy p { max-width: 100%; font-size: 14px; margin-top: 24px; }
+
+  .mainStripArea {
+    left: 0;
+    right: -22vw;
+    top: var(--strip-top);
+  }
+
+  .filmStrip { min-width: 760px; }
+  .backgroundLayer { left: 5%; top: 430px; transform: rotate(-20deg) scale(.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filmStrip { animation: none; }
+}
+
+/* Pixel-accurate tuning notes:
+   --background-rotation controls the faint diagonal strip.
+   --background-opacity controls its contrast.
+   --feather-width controls the black fade at both ends.
+   --peek percentage is controlled by --frame-width and the .peekFrame width.
+*/
