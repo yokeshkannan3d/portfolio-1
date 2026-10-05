@@ -51,17 +51,17 @@
 .backgroundLayer {
   position: absolute;
   z-index: 1;
-  width: min(1550px, 135vw);
-  height: var(--background-strip-height);
-  left: 48%;
-  top: 52%;
-  opacity: var(--background-opacity);
-  filter: blur(1.5px) grayscale(0.45);
-  transform: translate(-50%, -50%) rotate(var(--background-rotation));
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 1;
+  filter: none;
   pointer-events: none;
 }
 
 .mainStripArea {
+  display: none;
   --peek-frame-width: var(--frame-width);
   position: absolute;
   z-index: 2;
@@ -242,8 +242,7 @@
   }
 
   .backgroundLayer {
-    left: 42%;
-    top: 56%;
+    background-position: center center;
   }
 }
 
@@ -285,9 +284,8 @@
   }
 
   .backgroundLayer {
-    left: 18%;
-    top: 63%;
-    transform: translate(-50%, -50%) rotate(-20deg) scale(0.8);
+    background-position: center center;
+    background-size: auto 100%;
   }
 }
 
