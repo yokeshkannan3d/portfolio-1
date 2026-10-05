@@ -33,7 +33,10 @@ export default function AboutSection({
 
         <div className={styles.mainStripArea} aria-hidden="true">
           <FilmStrip frames={frames} height="var(--strip-height)" />
+          <span className={styles.feather + ' ' + styles.featherLeft} />
+          <span className={styles.feather + ' ' + styles.featherRight} />
         </div>
+      </div>
       </div>
     </section>
   );
