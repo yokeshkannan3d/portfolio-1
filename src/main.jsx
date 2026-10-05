@@ -1,3 +1,4 @@
+import { createRoot } from 'react-dom/client';
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronDown, Mail, Play, X } from 'lucide-react';
 import './styles.css';
