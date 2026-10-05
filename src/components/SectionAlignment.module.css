@@ -1,0 +1,13 @@
+:global(.work-inner){max-width:none;margin:0}
+:global(.work h2),
+:global(.work-intro){padding-left:clamp(20px,9vw,100px);padding-right:clamp(20px,9vw,100px)}
+:global(.content-narrow){max-width:none;margin:0}
+:global(.milestones),
+:global(.contact){padding-left:clamp(20px,9vw,100px);padding-right:clamp(20px,9vw,100px)}
+
+@media(max-width:700px){
+  :global(.work h2),
+  :global(.work-intro),
+  :global(.milestones),
+  :global(.contact){padding-left:20px;padding-right:20px}
+}
