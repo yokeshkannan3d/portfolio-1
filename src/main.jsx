@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, ChevronDown, Mail, Play, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown, Mail, Moon, Play, Sun, X } from 'lucide-react';
 import './styles.css';
 import AboutMe from "./components/AboutMe/AboutMe.jsx";
 
@@ -26,8 +26,8 @@ const WORK_CATEGORIES = [
   ]},
 ];
 
-function Nav() {
-  return <header className="nav"><a className="nav-logo" href="#top" aria-label="Yokesh Kannan home">YK</a><nav className="nav-links" aria-label="Primary navigation"><a href="#about">About</a><a href="#work">Work</a><a href="#milestones">Milestones</a><a href="#contact">Contact</a></nav></header>;
+function Nav({ theme, onToggleTheme }) {
+  return <header className="nav"><a className="nav-logo" href="#top" aria-label="Yokesh Kannan home">YK</a><nav className="nav-links" aria-label="Primary navigation"><a href="#about">About</a><a href="#work">Work</a><a href="#milestones">Milestones</a><a href="#contact">Contact</a></nav><button className="theme-toggle" onClick={onToggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} title={theme === 'dark' ? 'Light mode' : 'Dark mode'}>{theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}<span>{theme === 'dark' ? 'LIGHT' : 'DARK'}</span></button></header>;
 }
 
 function Hero() {
@@ -57,5 +57,14 @@ function Work() {
 
 function Milestones() { return <section id="milestones" className="milestones section-shell"><div className="content-narrow"><h2>Milestones</h2><div className="milestone-panel"><div className="milestone-item"><div className="milestone-dot" /><p>Created optimized low-poly assets for the real-time game engine. Built Boba Run, including vehicles, environment props, and modular assets.</p></div><div className="milestone-item"><div className="milestone-dot" /><p>Created optimized low-poly assets for the real-time game engine. Built environments, props, and modular assets.</p></div></div></div></section>; }
 function Contact() { return <section id="contact" className="contact section-shell"><div className="content-narrow"><h2>Get in Touch</h2><div className="contact-panel"><a href="https://www.linkedin.com/in/yokesh-kannan" target="_blank" rel="noreferrer" aria-label="LinkedIn"><span className="social-icon linkedin-icon">in</span></a><a href="https://www.behance.net/yokeshkannan" target="_blank" rel="noreferrer" aria-label="Behance"><span className="social-icon behance-icon">Bē</span></a><a href="mailto:yokeshkannan3d@gmail.com" aria-label="Email"><Mail size={36} /></a><a href="#" aria-label="Instagram"><span className="social-icon instagram-icon"><span /></span></a></div></div></section>; }
-function App() { return <div className="app"><Nav /><Hero /><About /><Work /><Milestones /><Contact /></div>; }
+function App() {
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem('portfolio-theme') || 'dark'; } catch { return 'dark'; }
+  });
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try { localStorage.setItem('portfolio-theme', theme); } catch {}
+  }, [theme]);
+  return <div className={`app theme-${theme}`}><Nav theme={theme} onToggleTheme={() => setTheme(value => value === 'dark' ? 'light' : 'dark')} /><Hero /><About /><Work /><Milestones /><Contact /></div>;
+}
 createRoot(document.getElementById('root')).render(<App />);
