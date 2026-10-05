@@ -10,7 +10,7 @@ const PRODUCT_VIZ_VIDEO = 'https://raw.githubusercontent.com/yokeshkannan3d/port
 const PRODUCT_VIZ_COVER = 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/cover.png';
 
 const WORK_CATEGORIES = [
-  { id: 'vfx', title: 'VFX & Compositing', subtitle: 'Visual effects, compositing & cinematic finishing', image: `${ASSET_BASE}/public/images/work-2.svg`, works: [
+  { id: 'vfx', title: 'VFX & Compositing', subtitle: 'Visual effects, compositing & cinematic finishing', image: `${ASSET_BASE}/public/images/work-2.svg`, coverVideo: REEL, works: [
     { title: 'Show Reel', video: REEL },
   ]},
   { id: 'product-viz', title: '3D Product Visualization', subtitle: 'Product modeling, materials, lighting & renders', image: PRODUCT_VIZ_COVER, works: [
@@ -44,7 +44,7 @@ function Hero() {
 function About() { return <AboutMe />; }
 
 function CategoryCard({ category, onOpen }) {
-  return <button className="work-card work-category-card" onClick={() => onOpen(category)} aria-label={`Open ${category.title}`}><img src={category.image} alt="" /><div className="category-card-overlay"><span className="category-index">{category.id === 'vfx' ? '01' : category.id === 'product-viz' ? '02' : category.id === 'hard-surface' ? '03' : '04'}</span><span className="work-label category-label">{category.title}</span><span className="category-subtitle">{category.subtitle}</span></div></button>;
+  return <button className="work-card work-category-card" onClick={() => onOpen(category)} aria-label={`Open ${category.title}`}>{category.coverVideo ? <video className="category-card-video" autoPlay muted loop playsInline preload="metadata"><source src={category.coverVideo} type="video/mp4" /></video> : <img src={category.image} alt="" />}<div className="category-card-overlay"><span className="category-index">{category.id === 'vfx' ? '01' : category.id === 'product-viz' ? '02' : category.id === 'hard-surface' ? '03' : '04'}</span><span className="work-label category-label">{category.title}</span><span className="category-subtitle">{category.subtitle}</span></div></button>;
 }
 
 function CategoryLibrary({ category, onClose }) {
