@@ -4,38 +4,41 @@ import styles from './AboutSection.module.css';
 const DEFAULT_BODY =
   "I'm a passionate 3D artist and developer who enjoys creating immersive digital experiences. I work with 3D animation, interactive experiences and modern web technologies.";
 
+const holes = Array.from({ length: 24 });
+
 export default function AboutSection({
   title = 'About me',
   body = DEFAULT_BODY,
   mainMedia = '/images/about-me.jpg',
-  backgroundMedia,
 }) {
-  return (
-    <section id="about" className={styles.aboutSection}>
-      <div
-        className={styles.backgroundLayer}
-        aria-hidden="true"
-        style={
-          backgroundMedia
-            ? { backgroundImage: `url("${backgroundMedia}")` }
-            : undefined
-        }
-      />
+  const renderHoles = (className) => (
+    <div className={className} aria-hidden="true">
+      {holes.map((_, index) => <span key={index} />)}
+    </div>
+  );
 
-      <div className={styles.aboutContent}>
-        <div className={styles.aboutText}>
-          <h2>{title}</h2>
-          <p>{body}</p>
+  const renderStrip = (echo = false) => (
+    <div className={echo ? styles.amEcho : styles.amStrip}>
+      {renderHoles(styles.amHoles)}
+      <div className={styles.amFrames}>
+        <div className={styles.amFrame}>
+          <img src={mainMedia} alt={echo ? '' : 'About me'} />
         </div>
+      </div>
+      {renderHoles(styles.amHoles)}
+    </div>
+  );
 
-        <div className={styles.filmStrip} aria-label="About me image">
-          <div className={`${styles.filmHoles} ${styles.top}`} aria-hidden="true" />
+  return (
+    <section id="about" className={styles.am}>
+      <h2 className={styles.amTitle}>{title}</h2>
 
-          <div className={styles.filmImage}>
-            <img src={mainMedia} alt="About me" />
-          </div>
+      <div className={styles.amGrid}>
+        <p className={styles.amText}>{body}</p>
 
-          <div className={`${styles.filmHoles} ${styles.bottom}`} aria-hidden="true" />
+        <div className={styles.amStage}>
+          {renderStrip(true)}
+          {renderStrip(false)}
         </div>
       </div>
     </section>
