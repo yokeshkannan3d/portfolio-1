@@ -12,7 +12,10 @@ export default function AboutSection({
   peekMedia,
   backgroundMedia,
 }) {
-  const frames = [{ src: mainMedia, type: 'image' }];
+  const frames = [
+    { src: mainMedia, type: 'image' },
+    { src: peekMedia || mainMedia, type: 'image', peek: true },
+  ];
 
   return (
     <section id="about" className={styles.aboutSection}>
@@ -23,8 +26,15 @@ export default function AboutSection({
       />
 
       <div className={styles.aboutContent}>
-        <div className={styles.mainStripArea}>
-          <FilmStrip frames={frames} variant="main" />
+        <div className={styles.copy}>
+          <h2>{title}</h2>
+          <p>{body}</p>
+        </div>
+
+        <div className={styles.mainStripArea} aria-hidden="true">
+          <FilmStrip frames={frames} height="var(--strip-height)" />
+          <span className={styles.feather + ' ' + styles.featherLeft} />
+          <span className={styles.feather + ' ' + styles.featherRight} />
         </div>
       </div>
     </section>
