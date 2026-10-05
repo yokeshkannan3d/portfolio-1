@@ -31,6 +31,9 @@ export default function AboutSection({
           <p>{body}</p>
         </div>
 
+        <div className={styles.mainStripArea}>
+          <FilmStrip frames={frames} variant="main" />
+        </div>
       </div>
     </section>
   );
