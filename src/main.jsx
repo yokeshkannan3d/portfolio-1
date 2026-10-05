@@ -13,7 +13,7 @@ const WORK_CATEGORIES = [
   { id: 'vfx', title: 'VFX & Compositing', subtitle: 'Visual effects, compositing & cinematic finishing', image: `${ASSET_BASE}/public/images/work-2.svg`, coverVideo: REEL, works: [
     { title: 'Show Reel', video: REEL },
   ]},
-  { id: 'product-viz', title: '3D Product Visualization', subtitle: 'Product modeling, materials, lighting & renders', image: PRODUCT_VIZ_COVER, works: [
+  { id: 'product-viz', title: '3D Product Visualization', subtitle: 'Product modeling, materials, lighting & renders', image: PRODUCT_VIZ_COVER, coverVideo: PRODUCT_VIZ_VIDEO, works: [
     { title: '3D Product Visualization', video: PRODUCT_VIZ_VIDEO, image: PRODUCT_VIZ_COVER },
   ]},
   { id: 'hard-surface', title: 'Hard Surface Modelling', subtitle: 'Detailed mechanical, vehicle & industrial assets', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png', subcategories: [
