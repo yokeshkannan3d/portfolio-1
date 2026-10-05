@@ -2,7 +2,8 @@ import React from 'react';
 import FilmStrip from './FilmStrip.jsx';
 import styles from './AboutSection.module.css';
 
-const DEFAULT_BODY = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type sheets.`;
+const DEFAULT_BODY =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry…";
 
 export default function AboutSection({
   title = 'About me',
@@ -26,20 +27,20 @@ export default function AboutSection({
         />
       </div>
 
+      <div className={styles.mainStripArea}>
+        <FilmStrip
+          frames={frames}
+          height="var(--strip-height)"
+          sprocketSize="var(--sprocket-size)"
+        />
+        <span className={`${styles.feather} ${styles.featherLeft}`} aria-hidden="true" />
+        <span className={`${styles.feather} ${styles.featherRight}`} aria-hidden="true" />
+      </div>
+
       <div className={styles.content}>
         <div className={styles.copy}>
           <h2>{title}</h2>
           <p>{body}</p>
-        </div>
-
-        <div className={styles.mainStripArea} aria-label="Film strip featuring Yokesh">
-          <FilmStrip
-            frames={frames}
-            height="var(--strip-height)"
-            sprocketSize="var(--sprocket-size)"
-          />
-          <span className={`${styles.feather} ${styles.featherLeft}`} aria-hidden="true" />
-          <span className={`${styles.feather} ${styles.featherRight}`} aria-hidden="true" />
         </div>
       </div>
     </section>
