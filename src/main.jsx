@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client';
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronDown, Mail, Moon, Play, Sun, X } from 'lucide-react';
 import './styles.css';
+import './components/SectionAlignment.module.css';
 import AboutMe from "./components/AboutMe/AboutMe.jsx";
 
 const ASSET_BASE = 'https://raw.githubusercontent.com/yokeshkannan3d/Yokeshkannan/main';
@@ -10,25 +11,17 @@ const PRODUCT_VIZ_VIDEO = 'https://raw.githubusercontent.com/yokeshkannan3d/port
 const PRODUCT_VIZ_COVER = 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/cover.png';
 
 const WORK_CATEGORIES = [
-  { id: 'vfx', title: 'VFX & Compositing', subtitle: 'Visual effects, compositing & cinematic finishing', image: `${ASSET_BASE}/public/images/work-2.svg`, coverVideo: REEL, works: [
-    { title: 'Show Reel', video: REEL },
-  ]},
-  { id: 'product-viz', title: '3D Product Visualization', subtitle: 'Product modeling, materials, lighting & renders', image: PRODUCT_VIZ_COVER, coverVideo: PRODUCT_VIZ_VIDEO, works: [
-    { title: '3D Product Visualization', video: PRODUCT_VIZ_VIDEO, image: PRODUCT_VIZ_COVER },
-  ]},
+  { id: 'vfx', title: 'VFX & Compositing', subtitle: 'Visual effects, compositing & cinematic finishing', image: `${ASSET_BASE}/public/images/work-2.svg`, coverVideo: REEL, works: [{ title: 'Show Reel', video: REEL }]},
+  { id: 'product-viz', title: '3D Product Visualization', subtitle: 'Product modeling, materials, lighting & renders', image: PRODUCT_VIZ_COVER, coverVideo: PRODUCT_VIZ_VIDEO, works: [{ title: '3D Product Visualization', video: PRODUCT_VIZ_VIDEO, image: PRODUCT_VIZ_COVER }]},
   { id: 'hard-surface', title: 'Hard Surface Modelling', subtitle: 'Detailed mechanical, vehicle & industrial assets', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png', subcategories: [
     { id: 'gun-models', title: 'Gun Models', subtitle: 'Desert Eagle — 3D model', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png', works: [
       { title: 'Gun Model 01', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png' },
       { title: 'Gun Model 02', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_2.png' },
       { title: 'Gun Model 03', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_3.png' }
     ]},
-    { id: 'car-models', title: 'Car Models', subtitle: 'Hard-surface vehicle modelling & detailing', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/car.jpg', works: [
-      { title: 'Car Model', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/car.jpg' }
-    ]}
+    { id: 'car-models', title: 'Car Models', subtitle: 'Hard-surface vehicle modelling & detailing', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/car.jpg', works: [{ title: 'Car Model', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/car.jpg' }]}
   ], works: []},
-  { id: 'motion', title: '3D Animation', subtitle: 'Character animation, walk cycles & motion studies', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif', works: [
-    { title: 'Walk Cycle', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif' },
-  ]},
+  { id: 'motion', title: '3D Animation', subtitle: 'Character animation, walk cycles & motion studies', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif', works: [{ title: 'Walk Cycle', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif' }]},
 ];
 
 function Nav({ theme, onToggleTheme }) {
@@ -40,13 +33,8 @@ function Hero() {
   useEffect(() => { if (!open) return; const onKey = e => e.key === 'Escape' && setOpen(false); document.addEventListener('keydown', onKey); document.body.classList.add('modal-open'); return () => { document.removeEventListener('keydown', onKey); document.body.classList.remove('modal-open'); }; }, [open]);
   return <>{<section id="top" className="hero"><video className="hero-preview" autoPlay muted loop playsInline preload="metadata"><source src={REEL} type="video/mp4" /></video><div className="hero-shade" /><div className="hero-copy"><div><h1>JUMP INTO MY <span>WORLD</span></h1><button className="reel-cta" onClick={() => setOpen(true)}><span className="play-ring"><Play size={25} fill="currentColor" /></span><span>PLAY SHOW REEL</span></button></div></div><button className="scroll-cue" onClick={() => document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })} aria-label="Scroll to About"><ChevronDown size={22} /></button></section>}{open && <div className="reel-modal" role="dialog" aria-modal="true" aria-label="Show reel" onClick={() => setOpen(false)}><button className="reel-close" onClick={() => setOpen(false)} aria-label="Close reel"><X size={30} /></button><div className="reel-player" onClick={e => e.stopPropagation()}><video autoPlay controls playsInline><source src={REEL} type="video/mp4" /></video></div></div>}</>;
 }
-
 function About() { return <AboutMe />; }
-
-function CategoryCard({ category, onOpen }) {
-  return <button className="work-card work-category-card" onClick={() => onOpen(category)} aria-label={`Open ${category.title}`}>{category.coverVideo ? <video className="category-card-video" autoPlay muted loop playsInline preload="metadata"><source src={category.coverVideo} type="video/mp4" /></video> : <img src={category.image} alt="" />}<div className="category-card-overlay"><span className="category-index">{category.id === 'vfx' ? '01' : category.id === 'product-viz' ? '02' : category.id === 'hard-surface' ? '03' : '04'}</span><span className="work-label category-label">{category.title}</span><span className="category-subtitle">{category.subtitle}</span></div></button>;
-}
-
+function CategoryCard({ category, onOpen }) { return <button className="work-card work-category-card" onClick={() => onOpen(category)} aria-label={`Open ${category.title}`}>{category.coverVideo ? <video className="category-card-video" autoPlay muted loop playsInline preload="metadata"><source src={category.coverVideo} type="video/mp4" /></video> : <img src={category.image} alt="" />}<div className="category-card-overlay"><span className="category-index">{category.id === 'vfx' ? '01' : category.id === 'product-viz' ? '02' : category.id === 'hard-surface' ? '03' : '04'}</span><span className="work-label category-label">{category.title}</span><span className="category-subtitle">{category.subtitle}</span></div></button>; }
 function CategoryLibrary({ category, onClose }) {
   useEffect(() => { const onKey = e => e.key === 'Escape' && onClose(); document.addEventListener('keydown', onKey); document.body.classList.add('modal-open'); return () => { document.removeEventListener('keydown', onKey); document.body.classList.remove('modal-open'); }; }, [onClose]);
   const renderWorks = (works, keyPrefix) => <div className="category-work-grid">{works.map((work, index) => <article className="category-work-item" key={`${keyPrefix}-${index}`}>{work.video ? <video className="category-work-video" controls playsInline preload="metadata" poster={work.image || undefined}><source src={work.video} type="video/mp4" /></video> : work.image ? <img src={work.image} alt={work.title} /> : <div className="category-work-placeholder"><span>{String(index + 1).padStart(2, '0')}</span><small>WORKPIECE</small></div>}<div className="category-work-caption"><span>{String(index + 1).padStart(2, '0')}</span><strong>{work.title}</strong></div></article>)}</div>;
@@ -59,17 +47,11 @@ function Work() {
   useEffect(() => { start(); return () => clearInterval(timerRef.current); }, []);
   return <section id="work" className="work section-shell"><div className="work-inner"><h2>Made by Yokesh</h2><p className="work-intro">Explore my work by category.</p><div className="carousel-shell" onMouseEnter={() => clearInterval(timerRef.current)} onMouseLeave={start}><button className="carousel-arrow left" onClick={() => move(-430)} aria-label="Previous category"><ArrowLeft size={23} /></button><div className="work-track" ref={trackRef} onPointerDown={() => clearInterval(timerRef.current)} onPointerUp={start}>{[...WORK_CATEGORIES, ...WORK_CATEGORIES].map((category, i) => <CategoryCard key={`${category.id}-${i}`} category={category} onOpen={setSelected} />)}</div><button className="carousel-arrow right" onClick={() => move(430)} aria-label="Next category"><ArrowRight size={23} /></button></div></div>{selected && <CategoryLibrary category={selected} onClose={() => setSelected(null)} />}</section>;
 }
-
 function Milestones() { return <section id="milestones" className="milestones section-shell"><div className="content-narrow"><h2>Milestones</h2><div className="milestone-panel"><div className="milestone-item"><img className="milestone-logo" src="https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Kung_Fu_Tea_Official_Logo.png" alt="Kung Fu Tea logo" /><p>Created optimized low-poly assets for the real-time game engine. Built Boba Run, including vehicles, environment props, and modular assets.</p></div><div className="milestone-item"><img className="milestone-logo" src="https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/M-web-1.png" alt="THEMUSEUM project" /><p>Created an immersive projection-mapping capstone project with THEMUSEUM, supporting students in exploring creative and technical approaches to immersive experiences.</p></div></div></div></section>; }
 function Contact() { return <section id="contact" className="contact section-shell"><div className="content-narrow"><h2>Get in Touch</h2><div className="contact-panel"><a href="https://www.linkedin.com/in/yokesh-kannan" target="_blank" rel="noreferrer" aria-label="LinkedIn"><span className="social-icon linkedin-icon">in</span></a><a href="https://www.behance.net/yokeshkannan" target="_blank" rel="noreferrer" aria-label="Behance"><span className="social-icon behance-icon">Bē</span></a><a href="mailto:yokeshkannan3d@gmail.com" aria-label="Email"><Mail size={36} /></a><a href="#" aria-label="Instagram"><span className="social-icon instagram-icon"><span /></span></a></div></div></section>; }
 function App() {
-  const [theme, setTheme] = useState(() => {
-    try { return localStorage.getItem('portfolio-theme') || 'dark'; } catch { return 'dark'; }
-  });
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    try { localStorage.setItem('portfolio-theme', theme); } catch {}
-  }, [theme]);
+  const [theme, setTheme] = useState(() => { try { return localStorage.getItem('portfolio-theme') || 'dark'; } catch { return 'dark'; } });
+  useEffect(() => { document.documentElement.dataset.theme = theme; try { localStorage.setItem('portfolio-theme', theme); } catch {} }, [theme]);
   return <div className={`app theme-${theme}`}><Nav theme={theme} onToggleTheme={() => setTheme(value => value === 'dark' ? 'light' : 'dark')} /><Hero /><About /><Work /><Milestones /><Contact /></div>;
 }
 createRoot(document.getElementById('root')).render(<App />);
