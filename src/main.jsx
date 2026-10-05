@@ -11,8 +11,7 @@ const PRODUCT_VIZ_COVER = 'https://raw.githubusercontent.com/yokeshkannan3d/port
 
 const WORK_CATEGORIES = [
   { id: 'vfx', title: 'VFX & Compositing', subtitle: 'Visual effects, compositing & cinematic finishing', image: `${ASSET_BASE}/public/images/work-2.svg`, works: [
-    { title: 'VFX & Compositing — Work 01', image: `${ASSET_BASE}/public/images/work-2.svg` },
-    { title: 'VFX & Compositing — Work 02', image: null }, { title: 'VFX & Compositing — Work 03', image: null },
+    { title: 'Show Reel', video: REEL },
   ]},
   { id: 'product-viz', title: '3D Product Visualization', subtitle: 'Product modeling, materials, lighting & renders', image: PRODUCT_VIZ_COVER, works: [
     { title: '3D Product Visualization', video: PRODUCT_VIZ_VIDEO, image: PRODUCT_VIZ_COVER },
