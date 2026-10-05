@@ -25,21 +25,18 @@ export default function AboutSection({
         style={backgroundMedia ? { backgroundImage: `url("${backgroundMedia}")` } : undefined}
       />
 
-      <div className={styles.mainStripArea} aria-hidden="true">
-        <FilmStrip
-          frames={frames}
-          height="var(--strip-height)"
-          sprocketSize="var(--sprocket-size)"
-        />
-        <span className={`${styles.feather} ${styles.featherLeft}`} />
-        <span className={`${styles.feather} ${styles.featherRight}`} />
-      </div>
-
-      <div className={styles.content}>
+      <div className={styles.aboutContent}>
         <div className={styles.copy}>
           <h2>{title}</h2>
           <p>{body}</p>
         </div>
+
+        <div className={styles.mainStripArea} aria-hidden="true">
+          <FilmStrip frames={frames} height="var(--strip-height)" />
+          <span className={styles.feather + ' ' + styles.featherLeft} />
+          <span className={styles.feather + ' ' + styles.featherRight} />
+        </div>
+      </div>
       </div>
     </section>
   );
