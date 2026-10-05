@@ -1,3 +1,6 @@
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
 .am {
   --am-w: clamp(320px, 100vw, 1440px);
   position: relative;
@@ -41,10 +44,7 @@
   min-width: 0;
 }
 
-.am-stage > .am-strip {
-  position: relative;
-  z-index: 1;
-}
+.am-stage > .am-strip { position: relative; z-index: 1; }
 
 .am-echo {
   position: absolute;
@@ -61,9 +61,7 @@
   mask-image: linear-gradient(90deg, transparent 0%, #000 30%);
 }
 
-.am-echo .am-frames {
-  overflow: hidden;
-}
+.am-echo .am-frames { overflow: hidden; }
 
 .am-echo .am-holes span {
   transform: scale(calc(1 / var(--sx)), calc(1 / var(--sy)));
@@ -92,9 +90,7 @@
   background: #000;
 }
 
-.am-holes span:nth-child(-n + 2) {
-  opacity: 0.55;
-}
+.am-holes span:nth-child(-n + 2) { opacity: 0.55; }
 
 .am-frames {
   list-style: none;
@@ -105,14 +101,20 @@
   --frame-gap: clamp(28px, 5vw, 70px);
   position: relative;
   gap: var(--frame-gap);
-  overflow: hidden;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
+
+.am-frames::-webkit-scrollbar { display: none; }
 
 .am-frame {
   flex: 0 0 var(--frame-w);
   aspect-ratio: 370 / 260;
   border-radius: clamp(20px, 3.3vw, 42px);
   overflow: hidden;
+  scroll-snap-align: center;
   background: #222;
 }
 
@@ -123,20 +125,28 @@
   display: block;
 }
 
+.am-ghost {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  left: calc((100% - var(--frame-w)) / 2 - var(--frame-w) - var(--frame-gap));
+  width: var(--frame-w);
+  opacity: 0.4;
+  pointer-events: none;
+  scroll-snap-align: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 90%);
+  mask-image: linear-gradient(90deg, transparent, #000 90%);
+}
+
+.am-ph {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #3a3a3a, #1e1e1e);
+}
+
 @media (max-width: 760px) {
-  .am-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .am-text {
-    max-width: none;
-  }
-
-  .am-stage {
-    margin-right: calc(-1 * clamp(20px, 9vw, 100px));
-  }
-
+  .am-grid { grid-template-columns: 1fr; gap: 32px; }
+  .am-text { max-width: none; }
   .am-echo {
     --sx: 1.2;
     --sy: 0.8;
@@ -145,7 +155,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .am-frames {
-    scroll-behavior: auto;
-  }
+  .am-frames { scroll-behavior: auto; }
 }
