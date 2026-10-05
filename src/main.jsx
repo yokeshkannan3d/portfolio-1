@@ -18,10 +18,13 @@ const WORK_CATEGORIES = [
     { title: '3D Product Visualization', video: PRODUCT_VIZ_VIDEO, image: PRODUCT_VIZ_COVER },
   ]},
   { id: 'hard-surface', title: 'Hard Surface Modelling', subtitle: 'Detailed mechanical, vehicle & industrial assets', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png', subcategories: [
-    { id: 'gun-models', title: 'Gun Models', subtitle: 'Hard-surface modelling, detailing & presentation', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png', works: [
+    { id: 'gun-models', title: 'Gun Models', subtitle: 'Desert Eagle — 3D model', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png', works: [
       { title: 'Gun Model 01', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png' },
       { title: 'Gun Model 02', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_2.png' },
       { title: 'Gun Model 03', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_3.png' }
+    ]},
+    { id: 'car-models', title: 'Car Models', subtitle: 'Hard-surface vehicle modelling & detailing', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/car.jpg', works: [
+      { title: 'Car Model', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/car.jpg' }
     ]}
   ], works: []},
   { id: 'motion', title: 'Motion Graphics', subtitle: 'Motion design, animation & kinetic visuals', image: `${ASSET_BASE}/public/images/work-3.svg`, works: [
