@@ -54,7 +54,7 @@ function Hero() {
 }
 
 function FilmStrip() {
-  const holes = Array.from({ length: 13 });
+  const holes = Array.from({ length: 10 });
   return <div className="film-primary"><div className="film-track">{holes.map((_, i) => <span key={`t-${i}`} />)}</div><div className="film-image-frame"><img src={ABOUT_IMAGE} alt="Yokesh on set" /></div><div className="film-track">{holes.map((_, i) => <span key={`b-${i}`} />)}</div></div>;
 }
 function DiagonalFilm() {
