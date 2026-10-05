@@ -4,7 +4,7 @@ import styles from './AboutSection.module.css';
 
 function SprocketPattern({ position, size }) {
   const patternId = useId().replace(/:/g, '');
-  const width = 28;
+  const width = 24;
   const height = 52;
 
   return (
