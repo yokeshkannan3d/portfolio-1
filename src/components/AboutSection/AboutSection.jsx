@@ -37,7 +37,6 @@ export default function AboutSection({
           <span className={styles.feather + ' ' + styles.featherRight} />
         </div>
       </div>
-      </div>
     </section>
   );
 }
