@@ -10,6 +10,7 @@ export default function AboutSection({
   body = DEFAULT_BODY,
   mainMedia,
   peekMedia,
+  backgroundMedia,
 }) {
   const frames = [
     { src: mainMedia, type: 'image' },
@@ -18,14 +19,11 @@ export default function AboutSection({
 
   return (
     <section id="about" className={styles.aboutSection}>
-      <div className={styles.backgroundLayer} aria-hidden="true">
-        <FilmStrip
-          frames={[{ src: mainMedia, type: 'image' }]}
-          height="var(--background-strip-height)"
-          sprocketSize="var(--background-sprocket-size)"
-          variant="background"
-        />
-      </div>
+      <div
+        className={styles.backgroundLayer}
+        aria-hidden="true"
+        style={backgroundMedia ? { backgroundImage: `url("${backgroundMedia}")` } : undefined}
+      />
 
       <div className={styles.mainStripArea} aria-hidden="true">
         <FilmStrip
