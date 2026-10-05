@@ -6,15 +6,16 @@ import AboutMe from "./components/AboutMe/AboutMe.jsx";
 
 const ASSET_BASE = 'https://raw.githubusercontent.com/yokeshkannan3d/Yokeshkannan/main';
 const REEL = `${ASSET_BASE}/public/videos/reel.mp4`;
+const PRODUCT_VIZ_VIDEO = 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/Product_vizualization.mp4';
+const PRODUCT_VIZ_COVER = 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/cover.png';
 
 const WORK_CATEGORIES = [
   { id: 'vfx', title: 'VFX & Compositing', subtitle: 'Visual effects, compositing & cinematic finishing', image: `${ASSET_BASE}/public/images/work-2.svg`, works: [
     { title: 'VFX & Compositing — Work 01', image: `${ASSET_BASE}/public/images/work-2.svg` },
     { title: 'VFX & Compositing — Work 02', image: null }, { title: 'VFX & Compositing — Work 03', image: null },
   ]},
-  { id: 'product-viz', title: '3D Product Visualization', subtitle: 'Product modeling, materials, lighting & renders', image: `${ASSET_BASE}/public/images/work-1.svg`, works: [
-    { title: '3D Product Visualization — Work 01', image: `${ASSET_BASE}/public/images/work-1.svg` },
-    { title: '3D Product Visualization — Work 02', image: null }, { title: '3D Product Visualization — Work 03', image: null },
+  { id: 'product-viz', title: '3D Product Visualization', subtitle: 'Product modeling, materials, lighting & renders', image: PRODUCT_VIZ_COVER, works: [
+    { title: '3D Product Visualization', video: PRODUCT_VIZ_VIDEO, image: PRODUCT_VIZ_COVER },
   ]},
   { id: 'hard-surface', title: 'Hard Surface Modelling', subtitle: 'Detailed mechanical, vehicle & industrial assets', image: `${ASSET_BASE}/public/images/work-1.svg`, works: [
     { title: 'Hard Surface Modelling — Work 01', image: `${ASSET_BASE}/public/images/work-1.svg` },
@@ -44,7 +45,7 @@ function CategoryCard({ category, onOpen }) {
 
 function CategoryLibrary({ category, onClose }) {
   useEffect(() => { const onKey = e => e.key === 'Escape' && onClose(); document.addEventListener('keydown', onKey); document.body.classList.add('modal-open'); return () => { document.removeEventListener('keydown', onKey); document.body.classList.remove('modal-open'); }; }, [onClose]);
-  return <div className="library-modal" onClick={onClose} role="dialog" aria-modal="true" aria-label={`${category.title} work library`}><div className="library-panel category-library-panel" onClick={e => e.stopPropagation()}><button className="library-close" onClick={onClose} aria-label="Close library"><X size={28} /></button><p className="eyebrow">WORK CATEGORY</p><h3>{category.title}</h3><p className="category-library-description">{category.subtitle}</p><div className="category-work-grid">{category.works.map((work, index) => <article className="category-work-item" key={`${category.id}-${index}`}>{work.image ? <img src={work.image} alt={work.title} /> : <div className="category-work-placeholder"><span>{String(index + 1).padStart(2, '0')}</span><small>WORKPIECE</small></div>}<div className="category-work-caption"><span>{String(index + 1).padStart(2, '0')}</span><strong>{work.title}</strong></div></article>)}</div></div></div>;
+  return <div className="library-modal" onClick={onClose} role="dialog" aria-modal="true" aria-label={`${category.title} work library`}><div className="library-panel category-library-panel" onClick={e => e.stopPropagation()}><button className="library-close" onClick={onClose} aria-label="Close library"><X size={28} /></button><p className="eyebrow">WORK CATEGORY</p><h3>{category.title}</h3><p className="category-library-description">{category.subtitle}</p><div className="category-work-grid">{category.works.map((work, index) => <article className="category-work-item" key={`${category.id}-${index}`}>{work.video ? <video className="category-work-video" controls playsInline preload="metadata" poster={work.image || undefined}><source src={work.video} type="video/mp4" /></video> : work.image ? <img src={work.image} alt={work.title} /> : <div className="category-work-placeholder"><span>{String(index + 1).padStart(2, '0')}</span><small>WORKPIECE</small></div>}<div className="category-work-caption"><span>{String(index + 1).padStart(2, '0')}</span><strong>{work.title}</strong></div></article>)}</div></div></div>;
 }
 
 function Work() {
