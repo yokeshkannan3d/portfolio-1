@@ -14,12 +14,63 @@
 .am-title { margin: 0 0 clamp(24px, 4.5vw, 60px); font-size: clamp(32px, 4.6vw, 56px); font-weight: 600; letter-spacing: -0.01em; color: #e6e6e6; }
 .am-grid { display: grid; grid-template-columns: minmax(0, 0.5fr) minmax(0, 0.5fr); align-items: center; gap: 0; }
 .am-text { position: relative; z-index: 2; margin: 0; font-size: clamp(16px, 2.1vw, 26px); line-height: 1.15; font-weight: 500; max-width: 28em; }
-.am-stage { position: relative; z-index: 0; margin-right: calc(-1 * clamp(20px, 9vw, 100px)); min-width: 0; }
-.am-stage > .am-strip { position: relative; z-index: 1; }
+.am-stage { position: relative; z-index: 0; margin-right: calc(-1 * clamp(20px, 9vw, 100px)); min-width: 0; isolation: isolate; }
+.am-stage > .am-strip { position: relative; z-index: 2; }
 .am-echo { position: absolute; inset: 0; z-index: 0; --sx: 1.3; --sy: 0.78; transform: rotate(-32deg) scale(var(--sx), var(--sy)); transform-origin: 50% 50%; opacity: 0.38; filter: blur(0.6px); pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 30%); mask-image: linear-gradient(90deg, transparent 0%, #000 30%); }
 .am-echo .am-frames { overflow: hidden; }
 .am-echo .am-holes span { transform: scale(calc(1 / var(--sx)), calc(1 / var(--sy))); border-radius: 12px; }
-.am-strip { position: relative; padding: clamp(10px, 1.6vw, 22px) 0; background: linear-gradient(90deg, #000 0%, #000 7%, rgba(0,0,0,0.92) 13%, #1b1b1b 25%, #161616 100%); box-shadow: 0 0 0 1px rgba(255,255,255,0.03); border-radius: 6px 0 0 6px; }
+
+.am-strip {
+  position: relative;
+  padding: clamp(10px, 1.6vw, 22px) 0;
+  background: #161616;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.03);
+  border-radius: 6px 0 0 6px;
+  opacity: 1;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Opaque feathering: these overlays darken the strip edges instead of
+   making the strip transparent, so the echo can never show through it. */
+.am-strip::before,
+.am-strip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.am-strip::before {
+  left: 0;
+  width: 30%;
+  background: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 12%,
+    rgba(0,0,0,0.96) 28%,
+    rgba(0,0,0,0.78) 48%,
+    rgba(0,0,0,0.34) 72%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+.am-strip::after {
+  right: 0;
+  width: 24%;
+  background: linear-gradient(
+    270deg,
+    #000 0%,
+    #000 12%,
+    rgba(0,0,0,0.92) 30%,
+    rgba(0,0,0,0.62) 52%,
+    rgba(0,0,0,0.24) 76%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
 .am-holes { display: flex; gap: clamp(8px, 1.1vw, 14px); padding-left: clamp(0px, 0.5vw, 8px); overflow: hidden; }
 .am-holes span { flex: 0 0 clamp(18px, 2.7vw, 38px); height: clamp(18px, 2.7vw, 36px); border-radius: 8px; }
 .am-holes span:nth-child(-n + 2) { opacity: 0.55; }
@@ -29,80 +80,18 @@
 .am-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .am-ghost { position: absolute; top: 0; height: 100%; left: calc((100% - var(--frame-w)) / 2 - var(--frame-w) - var(--frame-gap)); opacity: 0.4; pointer-events: none; scroll-snap-align: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 90%); mask-image: linear-gradient(90deg, transparent, #000 90%); }
 .am-ph { width: 100%; height: 100%; background: linear-gradient(135deg, #3a3a3a, #1e1e1e); }
-@media (max-width: 760px) { .am-grid { grid-template-columns: 1fr; gap: 32px; } .am-text { max-width: none; } .am-echo { --sx: 1.2; --sy: 0.8; transform: rotate(-20deg) scale(var(--sx), var(--sy)); } }
-@media (prefers-reduced-motion: reduce) { .am-frames { scroll-behavior: auto; } }
-
-
-/* Fade the right side of the film strip into the black page background */
-.am-strip {
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0,0,0,0.12) 7%,
-    rgba(0,0,0,0.32) 16%,
-    rgba(0,0,0,0.62) 27%,
-    rgba(0,0,0,0.86) 38%,
-    #000 50%,
-    #000 78%,
-    rgba(0,0,0,0.72) 88%,
-    rgba(0,0,0,0.28) 96%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0,0,0,0.12) 7%,
-    rgba(0,0,0,0.32) 16%,
-    rgba(0,0,0,0.62) 27%,
-    rgba(0,0,0,0.86) 38%,
-    #000 50%,
-    #000 78%,
-    rgba(0,0,0,0.72) 88%,
-    rgba(0,0,0,0.28) 96%,
-    transparent 100%
-  );
-}
 
 .am-echo .am-strip {
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    #000 35%,
-    rgba(0,0,0,0.5) 85%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    #000 35%,
-    rgba(0,0,0,0.5) 85%,
-    transparent 100%
-  );
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 35%, rgba(0,0,0,0.5) 85%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 35%, rgba(0,0,0,0.5) 85%, transparent 100%);
 }
 
-
-
-
-/* Keep the angled echo fully visible behind the main strip without bleeding through it. */
-.am-stage {
-  isolation: isolate;
+@media (max-width: 760px) {
+  .am-grid { grid-template-columns: 1fr; gap: 32px; }
+  .am-text { max-width: none; }
+  .am-echo { --sx: 1.2; --sy: 0.8; transform: rotate(-20deg) scale(var(--sx), var(--sy)); }
 }
 
-.am-echo {
-  z-index: 0;
+@media (prefers-reduced-motion: reduce) {
+  .am-frames { scroll-behavior: auto; }
 }
-
-.am-stage > .am-strip {
-  position: relative;
-  z-index: 2;
-  isolation: isolate;
-  background: linear-gradient(
-    90deg,
-    #000 0%,
-    #000 7%,
-    rgba(0,0,0,0.92) 13%,
-    #1b1b1b 25%,
-    #161616 100%
-  );
-}
-  opacity: 1;
