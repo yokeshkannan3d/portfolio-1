@@ -1,19 +1,26 @@
-/* Milestones: use About Me's exact horizontal content edges as the reference. */
+/* Milestones only: match the About Me section's horizontal content edges exactly. */
 .milestones {
-  padding-left: clamp(20px, 9vw, 100px);
-  padding-right: clamp(20px, 9vw, 100px);
+  width: 100%;
+  padding-left: clamp(20px, 9vw, 100px) !important;
+  padding-right: clamp(20px, 9vw, 100px) !important;
 }
 
 .milestones .content-narrow {
-  width: 100%;
-  max-width: none;
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.milestones h2,
+.milestones .milestone-panel {
   margin-left: 0;
   margin-right: 0;
 }
 
 @media (max-width: 700px) {
   .milestones {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 }
