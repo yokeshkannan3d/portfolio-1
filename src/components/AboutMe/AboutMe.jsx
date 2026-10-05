@@ -1,7 +1,7 @@
 import styles from "./AboutMe.module.css";
 
 const SLIDES = [
-  { src: "/image.jpeg", alt: "About me portfolio image" },
+  { src: "https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/image.jpeg", alt: "About me portfolio image" },
 ];
 
 const HOLES = 16;
