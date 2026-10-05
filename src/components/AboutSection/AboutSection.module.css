@@ -1,105 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 .aboutSection {
   --section-bg: #000;
   --strip-body: #1a1a1a;
   --strip-border: rgba(255, 255, 255, 0.1);
 
-  /* Main tunable values */
+  /* Reference tuning */
   --section-padding-y: 64px;
   --section-padding-x: 48px;
-  --title-size: clamp(32px, 3.5vw, 36px);
-  --body-size: clamp(14px, 1.1vw, 15px);
+  --title-size: clamp(32px, 2.5vw, 36px);
+  --body-size: clamp(14px, 1.04vw, 15px);
   --body-max-width: 420px;
 
-  --strip-height: clamp(270px, 31vw, 420px);
+  --strip-height: clamp(300px, 31vw, 420px);
+  --frame-width: clamp(520px, 48vw, 700px);
   --frame-height: calc(var(--strip-height) - (var(--sprocket-size) * 2) - 16px);
-  --frame-width: clamp(520px, 45vw, 760px);
   --frame-gap: 14px;
-  --sprocket-size: clamp(34px, 4vw, 46px);
+
+  --sprocket-size: clamp(34px, 3.2vw, 46px);
   --sprocket-hole-width: 14px;
   --sprocket-hole-height: 10px;
 
-  --background-strip-height: clamp(250px, 29vw, 390px);
-  --background-sprocket-size: clamp(24px, 3vw, 34px);
+  --background-strip-height: clamp(270px, 30vw, 400px);
+  --background-sprocket-size: clamp(24px, 2.5vw, 34px);
   --background-rotation: -23deg;
-  --background-opacity: 0.11;
+  --background-opacity: 0.1;
 
-  --feather-width: clamp(120px, 11vw, 160px);
+  --feather-width: clamp(120px, 10vw, 160px);
   --peek-percentage: 20%;
   --strip-drift: 3px;
 
   position: relative;
   min-height: 650px;
   overflow: hidden;
-  background: var(--section-bg);
   isolation: isolate;
+  background: var(--section-bg);
   color: #fff;
 }
 
-.backgroundLayer,
-.mainStripArea,
-.content,
-.feather {
+/* Explicit layer stack: background 0, depth strip 1, main strip 2,
+   feather overlays 3, typography 4. */
+.aboutSection::before {
+  content: '';
   position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--section-bg);
 }
 
 .backgroundLayer {
+  position: absolute;
   z-index: 1;
-  width: min(1500px, 125vw);
+  width: min(1550px, 135vw);
   height: var(--background-strip-height);
-  left: 35%;
-  top: 55%;
+  left: 48%;
+  top: 52%;
   opacity: var(--background-opacity);
-  filter: blur(1.5px) grayscale(0.35);
+  filter: blur(1.5px) grayscale(0.45);
   transform: translate(-50%, -50%) rotate(var(--background-rotation));
   pointer-events: none;
 }
 
-.content {
-  z-index: 4;
-  inset: 0;
-  pointer-events: none;
-}
-
-.copy {
-  position: absolute;
-  left: var(--section-padding-x);
-  top: 50%;
-  width: 40%;
-  max-width: 520px;
-  transform: translateY(-50%);
-  pointer-events: auto;
-}
-
-.copy h2 {
-  margin: 0;
-  color: #fff;
-  font-family: Inter, Arial, sans-serif;
-  font-size: var(--title-size);
-  line-height: 1.1;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-}
-
-.copy p {
-  margin: 24px 0 0;
-  max-width: var(--body-max-width);
-  color: rgba(255, 255, 255, 0.9);
-  font-family: Inter, Arial, sans-serif;
-  font-size: var(--body-size);
-  line-height: 1.6;
-  font-weight: 400;
-}
-
 .mainStripArea {
+  --peek-frame-width: var(--frame-width);
+  position: absolute;
   z-index: 2;
-  left: 40%;
-  right: -24vw;
+  left: 42%;
+  right: -30vw;
   top: 50%;
   height: var(--strip-height);
-  transform: translateY(-50%);
   min-width: 0;
+  transform: translateY(-50%);
   filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.6));
   pointer-events: none;
 }
@@ -108,26 +79,26 @@
   position: relative;
   width: 100%;
   height: var(--strip-height);
-  min-width: 880px;
+  min-width: 900px;
   animation: filmDrift 8s ease-in-out infinite alternate;
 }
 
 .backgroundStrip {
-  min-width: 1100px;
+  min-width: 1200px;
   animation: none;
 }
 
 .stripBody {
   position: absolute;
   inset: 0;
-  padding: var(--sprocket-size) 0;
   overflow: hidden;
+  padding: var(--sprocket-size) 0;
   border: 1px solid var(--strip-border);
   border-radius: 4px;
   background: var(--strip-body);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.75);
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.8);
 }
 
 .sprockets {
@@ -139,16 +110,22 @@
   pointer-events: none;
 }
 
-.sprocketsTop { top: 0; }
-.sprocketsBottom { bottom: 0; transform: rotate(180deg); }
+.sprocketsTop {
+  top: 0;
+}
+
+.sprocketsBottom {
+  bottom: 0;
+  transform: rotate(180deg);
+}
 
 .frameTrack {
-  height: 100%;
   display: flex;
   align-items: stretch;
   gap: var(--frame-gap);
-  padding: 8px 0;
   width: max-content;
+  height: 100%;
+  padding: 8px 0;
 }
 
 .frame {
@@ -158,28 +135,25 @@
   overflow: hidden;
   border-radius: 6px;
   background: #0c0c0c;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.25);
 }
 
 .frame img,
 .frame video {
+  display: block;
   width: 100%;
   height: 100%;
-  display: block;
   object-fit: cover;
 }
 
 .peekFrame {
-  width: var(--peek-frame-width);
-  flex-basis: var(--peek-frame-width);
   opacity: 0.6;
 }
 
-.mainStripArea {
-  --peek-frame-width: calc(var(--frame-width) * var(--peek-percentage) / 100);
-}
-
 .feather {
+  position: absolute;
   z-index: 3;
   top: -1px;
   bottom: -1px;
@@ -207,29 +181,69 @@
   );
 }
 
+.content {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+}
+
+.copy {
+  position: absolute;
+  left: var(--section-padding-x);
+  top: 50%;
+  width: min(36%, 520px);
+  transform: translateY(-50%);
+}
+
+.copy h2 {
+  margin: 0;
+  color: #fff;
+  font-family: Inter, Arial, sans-serif;
+  font-size: var(--title-size);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.copy p {
+  max-width: var(--body-max-width);
+  margin: 24px 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Inter, Arial, sans-serif;
+  font-size: var(--body-size);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
 @keyframes filmDrift {
-  from { transform: translateX(0); }
-  to { transform: translateX(var(--strip-drift)); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--strip-drift));
+  }
 }
 
 @media (max-width: 1023px) {
   .aboutSection {
     --section-padding-x: 36px;
-    --strip-height: clamp(250px, 34vw, 360px);
+    --section-padding-y: 52px;
+    --strip-height: clamp(270px, 35vw, 360px);
+    --frame-width: clamp(480px, 54vw, 620px);
   }
 
   .copy {
-    width: 45%;
+    width: min(45%, 430px);
   }
 
   .mainStripArea {
-    left: 43%;
-    right: -32vw;
+    left: 46%;
+    right: -40vw;
   }
 
   .backgroundLayer {
-    left: 24%;
-    top: 57%;
+    left: 42%;
+    top: 56%;
   }
 }
 
@@ -239,10 +253,10 @@
     --section-padding-x: 24px;
     --section-padding-y: 56px;
     --strip-height: 300px;
-    --sprocket-size: clamp(28px, 8vw, 32px);
+    --sprocket-size: clamp(28px, 7vw, 32px);
     --sprocket-hole-width: 11px;
     --sprocket-hole-height: 8px;
-    --frame-width: min(78vw, 520px);
+    --frame-width: min(85vw, 520px);
     --frame-height: calc(var(--strip-height) - (var(--sprocket-size) * 2) - 16px);
     --background-strip-height: 240px;
     --background-sprocket-size: 24px;
@@ -253,7 +267,6 @@
     left: auto;
     top: auto;
     width: auto;
-    max-width: none;
     padding: var(--section-padding-y) var(--section-padding-x) 0;
     transform: none;
   }
@@ -268,12 +281,12 @@
   }
 
   .filmStrip {
-    min-width: 760px;
+    min-width: 900px;
   }
 
   .backgroundLayer {
-    left: 10%;
-    top: 64%;
+    left: 18%;
+    top: 63%;
     transform: translate(-50%, -50%) rotate(-20deg) scale(0.8);
   }
 }
@@ -286,8 +299,8 @@
 
 /*
 Tuning:
-- --background-rotation: faint diagonal strip angle.
-- --background-opacity: background strip contrast.
-- --feather-width: black fade width at both ends.
-- --peek-percentage: visible width relationship of the second frame.
+--background-rotation: diagonal depth-strip angle.
+--background-opacity: depth-strip visibility.
+--feather-width: black fade width at each main-strip end.
+--peek-percentage: intended second-frame visibility ratio.
 */
