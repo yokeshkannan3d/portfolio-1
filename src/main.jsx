@@ -17,10 +17,13 @@ const WORK_CATEGORIES = [
   { id: 'product-viz', title: '3D Product Visualization', subtitle: 'Product modeling, materials, lighting & renders', image: PRODUCT_VIZ_COVER, works: [
     { title: '3D Product Visualization', video: PRODUCT_VIZ_VIDEO, image: PRODUCT_VIZ_COVER },
   ]},
-  { id: 'hard-surface', title: 'Hard Surface Modelling', subtitle: 'Detailed mechanical, vehicle & industrial assets', image: `${ASSET_BASE}/public/images/work-1.svg`, works: [
-    { title: 'Hard Surface Modelling — Work 01', image: `${ASSET_BASE}/public/images/work-1.svg` },
-    { title: 'Hard Surface Modelling — Work 02', image: null }, { title: 'Hard Surface Modelling — Work 03', image: null }, { title: 'Hard Surface Modelling — Work 04', image: null },
-  ]},
+  { id: 'hard-surface', title: 'Hard Surface Modelling', subtitle: 'Detailed mechanical, vehicle & industrial assets', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png', subcategories: [
+    { id: 'gun-models', title: 'Gun Models', subtitle: 'Hard-surface modelling, detailing & presentation', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png', works: [
+      { title: 'Gun Model 01', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_1.png' },
+      { title: 'Gun Model 02', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_2.png' },
+      { title: 'Gun Model 03', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/Gun_3.png' }
+    ]}
+  ], works: []},
   { id: 'motion', title: 'Motion Graphics', subtitle: 'Motion design, animation & kinetic visuals', image: `${ASSET_BASE}/public/images/work-3.svg`, works: [
     { title: 'Motion Graphics — Work 01', image: `${ASSET_BASE}/public/images/work-3.svg` },
     { title: 'Motion Graphics — Work 02', image: null }, { title: 'Motion Graphics — Work 03', image: null },
@@ -45,9 +48,9 @@ function CategoryCard({ category, onOpen }) {
 
 function CategoryLibrary({ category, onClose }) {
   useEffect(() => { const onKey = e => e.key === 'Escape' && onClose(); document.addEventListener('keydown', onKey); document.body.classList.add('modal-open'); return () => { document.removeEventListener('keydown', onKey); document.body.classList.remove('modal-open'); }; }, [onClose]);
-  return <div className="library-modal" onClick={onClose} role="dialog" aria-modal="true" aria-label={`${category.title} work library`}><div className="library-panel category-library-panel" onClick={e => e.stopPropagation()}><button className="library-close" onClick={onClose} aria-label="Close library"><X size={28} /></button><p className="eyebrow">WORK CATEGORY</p><h3>{category.title}</h3><p className="category-library-description">{category.subtitle}</p><div className="category-work-grid">{category.works.map((work, index) => <article className="category-work-item" key={`${category.id}-${index}`}>{work.video ? <video className="category-work-video" controls playsInline preload="metadata" poster={work.image || undefined}><source src={work.video} type="video/mp4" /></video> : work.image ? <img src={work.image} alt={work.title} /> : <div className="category-work-placeholder"><span>{String(index + 1).padStart(2, '0')}</span><small>WORKPIECE</small></div>}<div className="category-work-caption"><span>{String(index + 1).padStart(2, '0')}</span><strong>{work.title}</strong></div></article>)}</div></div></div>;
+  const renderWorks = (works, keyPrefix) => <div className="category-work-grid">{works.map((work, index) => <article className="category-work-item" key={`${keyPrefix}-${index}`}>{work.video ? <video className="category-work-video" controls playsInline preload="metadata" poster={work.image || undefined}><source src={work.video} type="video/mp4" /></video> : work.image ? <img src={work.image} alt={work.title} /> : <div className="category-work-placeholder"><span>{String(index + 1).padStart(2, '0')}</span><small>WORKPIECE</small></div>}<div className="category-work-caption"><span>{String(index + 1).padStart(2, '0')}</span><strong>{work.title}</strong></div></article>)}</div>;
+  return <div className="library-modal" onClick={onClose} role="dialog" aria-modal="true" aria-label={`${category.title} work library`}><div className="library-panel category-library-panel" onClick={e => e.stopPropagation()}><button className="library-close" onClick={onClose} aria-label="Close library"><X size={28} /></button><p className="eyebrow">WORK CATEGORY</p><h3>{category.title}</h3><p className="category-library-description">{category.subtitle}</p>{category.subcategories ? category.subcategories.map(sub => <section className="work-subcategory" key={sub.id}><div className="work-subcategory-heading"><span>SUB CATEGORY</span><h4>{sub.title}</h4><p>{sub.subtitle}</p></div>{renderWorks(sub.works, sub.id)}</section>) : renderWorks(category.works, category.id)}</div></div>;
 }
-
 function Work() {
   const [selected, setSelected] = useState(null); const trackRef = useRef(null); const timerRef = useRef(null);
   const move = distance => trackRef.current?.scrollBy({ left: distance, behavior: 'smooth' });
