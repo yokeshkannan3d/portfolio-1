@@ -41,138 +41,20 @@
   display: none;
 }
 
-.mainStripArea {
-  position: absolute;
-  z-index: 2;
-  left: 0;
-  right: 0;
-  top: 50%;
-  width: 100%;
-  height: var(--strip-height);
-  transform: translateY(-50%);
-  display: block;
-  visibility: visible;
-  opacity: 1;
-  filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.6));
-  pointer-events: none;
-}
-
-.filmStripWrapper {
+.aboutContent {
   position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: var(--strip-height);
-  display: flex;
-  align-items: center;
-}
-
-.filmStrip {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: var(--strip-height);
-  min-height: var(--strip-height);
-  transform: translateY(var(--strip-translate-y));
-  animation: filmDrift 8s ease-in-out infinite alternate;
-}
-
-.backgroundStrip {
-  animation: none;
-}
-
-.stripBody {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: block;
-  overflow: hidden;
-  border-radius: var(--strip-radius);
-  background:
-    repeating-linear-gradient(
-      to right,
-      var(--strip-hole-color) 0,
-      var(--strip-hole-color) var(--strip-hole-width),
-      transparent var(--strip-hole-width),
-      transparent var(--strip-hole-step)
-    ) top / 100% var(--strip-hole-height) no-repeat,
-    repeating-linear-gradient(
-      to right,
-      var(--strip-hole-color) 0,
-      var(--strip-hole-color) var(--strip-hole-width),
-      transparent var(--strip-hole-width),
-      transparent var(--strip-hole-step)
-    ) bottom / 100% var(--strip-hole-height) no-repeat,
-    var(--strip-body);
-}
-
-.sprockets {
-  display: none;
-}
-
-.frameTrack {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: stretch;
-  gap: var(--frame-gap);
-  width: max-content;
-  height: 100%;
-  padding: var(--strip-hole-height) 0;
-}
-
-.frame {
-  width: var(--frame-width);
-  height: var(--frame-height);
-  flex: 0 0 var(--frame-width);
-  overflow: hidden;
-  border-radius: 6px;
-  background: #0c0c0c;
-}
-
-.frame img,
-.frame video {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.peekFrame {
-  opacity: 0.6;
-}
-
-.feather {
-  position: absolute;
-  z-index: 3;
-  top: -1px;
-  bottom: -1px;
-  width: var(--feather-width);
-  pointer-events: none;
-}
-
-.featherLeft {
-  left: 0;
-  background: linear-gradient(to right, #000 0%, rgba(0, 0, 0, 0.85) 30%, rgba(0, 0, 0, 0) 100%);
-}
-
-.featherRight {
-  right: 0;
-  background: linear-gradient(to left, #000 0%, rgba(0, 0, 0, 0.85) 30%, rgba(0, 0, 0, 0) 100%);
-}
-
-.content {
-  position: absolute;
   z-index: 4;
-  inset: 0;
+  min-height: 650px;
+  display: grid;
+  grid-template-columns: minmax(0, 45%) minmax(0, 55%);
+  align-items: center;
+  padding-left: var(--section-padding-x);
 }
 
 .copy {
-  position: absolute;
-  left: var(--section-padding-x);
-  top: 50%;
-  width: min(45%, 640px);
-  transform: translateY(-50%);
+  position: relative;
+  width: min(100%, 640px);
+  transform: none;
 }
 
 .copy h2 {
