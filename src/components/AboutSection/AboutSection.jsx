@@ -10,6 +10,7 @@ export default function AboutSection({
   body = DEFAULT_BODY,
   mainMedia,
   peekMedia,
+  backgroundMedia,
 }) {
   const frames = [
     { src: mainMedia, type: 'image' },
@@ -18,19 +19,27 @@ export default function AboutSection({
 
   return (
     <section id="about" className={styles.aboutSection}>
-      <div className={styles.backgroundStripLayer} aria-hidden="true">
-        <FilmStrip frames={[]} height="var(--bg-strip-height)" variant="background" />
-      </div>
-
-      <div className={styles.textColumn}>
-        <h2>{title}</h2>
-        <p>{body}</p>
-      </div>
+      <div
+        className={styles.backgroundLayer}
+        aria-hidden="true"
+        style={backgroundMedia ? { backgroundImage: `url("${backgroundMedia}")` } : undefined}
+      />
 
       <div className={styles.mainStripArea} aria-hidden="true">
-        <FilmStrip frames={frames} height="var(--strip-height)" />
-        <span className={styles.featherLeft} />
-        <span className={styles.featherRight} />
+        <FilmStrip
+          frames={frames}
+          height="var(--strip-height)"
+          sprocketSize="var(--sprocket-size)"
+        />
+        <span className={`${styles.feather} ${styles.featherLeft}`} />
+        <span className={`${styles.feather} ${styles.featherRight}`} />
+      </div>
+
+      <div className={styles.content}>
+        <div className={styles.copy}>
+          <h2>{title}</h2>
+          <p>{body}</p>
+        </div>
       </div>
     </section>
   );
