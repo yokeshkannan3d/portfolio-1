@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowLeft, ArrowRight, ChevronDown, Mail, Play, X } from 'lucide-react';
 import './styles.css';
+import AboutSection from './components/AboutSection/AboutSection.jsx';
 
 const ASSET_BASE = 'https://raw.githubusercontent.com/yokeshkannan3d/Yokeshkannan/main';
 const ABOUT_IMAGE = `${ASSET_BASE}/public/images/about-film.jpg`;
@@ -53,35 +54,14 @@ function Hero() {
   </>;
 }
 
-function FilmStrip() {
-  const holes = Array.from({ length: 9 });
-  const HoleRow = ({ className, prefix }) => (
-    <div className={`about-hole-row ${className}`}>
-      {holes.map((_, i) => <span key={`${prefix}-${i}`} />)}
-    </div>
-  );
-
-  return (
-    <div className="about-film" aria-hidden="true">
-      <HoleRow className="about-hole-row-top" prefix="top" />
-      <div className="about-film-window about-film-window-edge-left"><img src={ABOUT_IMAGE} alt="" /></div>
-      <div className="about-film-window about-film-window-left"><img src={ABOUT_IMAGE} alt="" /></div>
-      <div className="about-film-window about-film-window-right"><img src={ABOUT_IMAGE} alt="" /></div>
-      <div className="about-film-window about-film-window-edge-right"><img src={ABOUT_IMAGE} alt="" /></div>
-      <HoleRow className="about-hole-row-bottom" prefix="bottom" />
-    </div>
-  );
-}
 function About() {
   return (
-    <section id="about" className="about section-shell">
-      <div className="about-film-stage" aria-hidden="true" />
-      <div className="about-copy">
-        <h2>About me</h2>
-        <p>{BIO}</p>
-      </div>
-      <FilmStrip />
-    </section>
+    <AboutSection
+      title="About me"
+      body={BIO}
+      mainMedia={ABOUT_IMAGE}
+      peekMedia={ABOUT_IMAGE}
+    />
   );
 }
 function WorkCard({ work, onOpen }) {
