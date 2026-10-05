@@ -19,7 +19,7 @@
 .am-echo { position: absolute; inset: 0; z-index: 0; --sx: 1.3; --sy: 0.78; transform: rotate(-32deg) scale(var(--sx), var(--sy)); transform-origin: 50% 50%; opacity: 0.38; filter: blur(0.6px); pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 30%); mask-image: linear-gradient(90deg, transparent 0%, #000 30%); }
 .am-echo .am-frames { overflow: hidden; }
 .am-echo .am-holes span { transform: scale(calc(1 / var(--sx)), calc(1 / var(--sy))); border-radius: 12px; }
-.am-strip { position: relative; padding: clamp(10px, 1.6vw, 22px) 0; background: linear-gradient(90deg, rgba(20,20,20,0) 0%, #1b1b1b 14%, #161616 100%); box-shadow: 0 0 0 1px rgba(255,255,255,0.03); border-radius: 6px 0 0 6px; }
+.am-strip { position: relative; padding: clamp(10px, 1.6vw, 22px) 0; background: linear-gradient(90deg, #000 0%, #000 7%, rgba(0,0,0,0.92) 13%, #1b1b1b 25%, #161616 100%); box-shadow: 0 0 0 1px rgba(255,255,255,0.03); border-radius: 6px 0 0 6px; }
 .am-holes { display: flex; gap: clamp(8px, 1.1vw, 14px); padding-left: clamp(0px, 0.5vw, 8px); overflow: hidden; }
 .am-holes span { flex: 0 0 clamp(18px, 2.7vw, 38px); height: clamp(18px, 2.7vw, 36px); border-radius: 8px; }
 .am-holes span:nth-child(-n + 2) { opacity: 0.55; }
