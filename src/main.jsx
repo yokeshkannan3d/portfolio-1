@@ -30,7 +30,52 @@ const WORK_CATEGORIES = [
   ]},
 ];
 
-function Nav() { return <header className="nav"><a className="nav-logo" href="#top" aria-label="Yokesh Kannan home">YK</a><nav className="nav-links" aria-label="Primary navigation"><a href="#about">About</a><a href="#work">Work</a><a href="#milestones">Milestones</a><a href="#contact">Contact</a></nav></header>; }
+function Nav() {
+  const [activeSection,setActiveSection]=useState("");
+
+  useEffect(()=>{
+    const ids=["about","work","milestones","contact"];
+    const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
+    if(!sections.length)return undefined;
+
+    const observer=new IntersectionObserver(entries=>{
+      const visible=entries
+        .filter(entry=>entry.isIntersecting)
+        .sort((a,b)=>b.intersectionRatio-a.intersectionRatio);
+
+      if(visible[0]?.target?.id){
+        setActiveSection(visible[0].target.id);
+      }
+    },{threshold:[.2,.35,.5,.7],rootMargin:"-25% 0px -55% 0px"});
+
+    sections.forEach(section=>observer.observe(section));
+    return()=>observer.disconnect();
+  },[]);
+
+  const links=[
+    ["about","About"],
+    ["work","Work"],
+    ["milestones","Milestones"],
+    ["contact","Contact"],
+  ];
+
+  return <header className="nav">
+    <a className="nav-logo" href="#top" aria-label="Yokesh Kannan home">YK</a>
+    <nav className="nav-links" aria-label="Primary navigation">
+      {links.map(([id,label])=>(
+        <a
+          key={id}
+          href={`#${id}`}
+          className={activeSection===id?"nav-active":""}
+          aria-current={activeSection===id?"page":undefined}
+          onClick={()=>setActiveSection(id)}
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+  </header>;
+}
 function Hero() {
   const [open,setOpen]=useState(false);
   const previewRef=useRef(null);
