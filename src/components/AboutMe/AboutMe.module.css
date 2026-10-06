@@ -187,7 +187,7 @@
 }
 
 .am-side-frame {
-  flex: 0 0 clamp(180px, 24vw, 300px);
+  flex: 0 0 clamp(220px, 33.6vw, 370px);
   aspect-ratio: 370 / 260;
   border-radius: clamp(20px, 3.3vw, 42px);
   overflow: hidden;
@@ -201,11 +201,11 @@
 }
 
 .am-side-frame-left {
-  margin-left: calc(-1 * clamp(140px, 19vw, 260px));
+  margin-left: calc(-1 * clamp(190px, 28vw, 330px));
 }
 
 .am-side-frame-right {
-  margin-right: calc(-1 * clamp(140px, 19vw, 260px));
+  margin-right: calc(-1 * clamp(190px, 28vw, 330px));
 }
 
 @media (max-width: 760px) {
@@ -214,14 +214,14 @@
   }
 
   .am-side-frame {
-    flex-basis: 160px;
+    flex-basis: clamp(220px, 33.6vw, 370px);
   }
 
   .am-side-frame-left {
-    margin-left: -120px;
+    margin-left: -190px;
   }
 
   .am-side-frame-right {
-    margin-right: -120px;
+    margin-right: -190px;
   }
 }
