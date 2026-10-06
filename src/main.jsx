@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import { flushSync } from 'react-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronDown, Moon, Play, Sun, X } from 'lucide-react';
 import './styles.css';
@@ -30,7 +31,88 @@ const WORK_CATEGORIES = [
 ];
 
 function Nav({ theme, onToggleTheme }) { return <header className="nav"><a className="nav-logo" href="#top" aria-label="Yokesh Kannan home">YK</a><nav className="nav-links" aria-label="Primary navigation"><a href="#about">About</a><a href="#work">Work</a><a href="#milestones">Milestones</a><a href="#contact">Contact</a></nav><button className="theme-toggle" onClick={onToggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} title={theme === 'dark' ? 'Light mode' : 'Dark mode'}>{theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}<span>{theme === 'dark' ? 'LIGHT' : 'DARK'}</span></button></header>; }
-function Hero() { const [open,setOpen]=useState(false); useEffect(()=>{if(!open)return;const onKey=e=>e.key==='Escape'&&setOpen(false);document.addEventListener('keydown',onKey);document.body.classList.add('modal-open');return()=>{document.removeEventListener('keydown',onKey);document.body.classList.remove('modal-open');}},[open]); return <>{<section id="top" className="hero"><video className="hero-preview" autoPlay muted loop playsInline preload="metadata"><source src={REEL} type="video/mp4"/></video><div className="hero-shade"/><div className="hero-copy"><div><h1>JUMP INTO MY <span>WORLD</span></h1><button className="reel-cta" onClick={()=>setOpen(true)}><span className="play-ring"><Play size={25} fill="currentColor"/></span><span>PLAY SHOW REEL</span></button></div></div><button className="scroll-cue" onClick={()=>document.querySelector('#about')?.scrollIntoView({behavior:'smooth'})} aria-label="Scroll to About"><ChevronDown size={22}/></button></section>}{open&&<div className="reel-modal" role="dialog" aria-modal="true" aria-label="Show reel" onClick={()=>setOpen(false)}><button className="reel-close" onClick={()=>setOpen(false)} aria-label="Close reel"><X size={30}/></button><div className="reel-player" onClick={e=>e.stopPropagation()}><video autoPlay controls playsInline><source src={REEL} type="video/mp4"/></video></div></div>}</>; }
+function Hero() {
+  const [open,setOpen]=useState(false);
+  const previewRef=useRef(null);
+  const reelRef=useRef(null);
+
+  const closeReel=()=>{
+    reelRef.current?.pause();
+    setOpen(false);
+  };
+
+  const playShowReel=()=>{
+    const resumeAt=previewRef.current?.currentTime||0;
+    flushSync(()=>setOpen(true));
+
+    const video=reelRef.current;
+    if(!video)return;
+
+    try{video.currentTime=resumeAt;}catch{}
+    video.muted=false;
+    video.volume=1;
+
+    const playPromise=video.play();
+    if(playPromise?.catch) playPromise.catch(()=>{});
+
+    const requestFullscreen=
+      video.requestFullscreen?.bind(video)||
+      video.webkitRequestFullscreen?.bind(video)||
+      video.msRequestFullscreen?.bind(video);
+
+    if(requestFullscreen){
+      try{
+        const fullscreenPromise=requestFullscreen();
+        if(fullscreenPromise?.catch) fullscreenPromise.catch(()=>{});
+      }catch{}
+    }
+  };
+
+  useEffect(()=>{
+    if(!open)return;
+    const onKey=e=>e.key==='Escape'&&closeReel();
+    const onFullscreenChange=()=>{
+      const fullscreenElement=document.fullscreenElement||document.webkitFullscreenElement;
+      if(!fullscreenElement&&open) reelRef.current?.pause();
+    };
+    document.addEventListener('keydown',onKey);
+    document.addEventListener('fullscreenchange',onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange',onFullscreenChange);
+    document.body.classList.add('modal-open');
+    return()=>{
+      document.removeEventListener('keydown',onKey);
+      document.removeEventListener('fullscreenchange',onFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange',onFullscreenChange);
+      document.body.classList.remove('modal-open');
+    };
+  },[open]);
+
+  return <>
+    <section id="top" className="hero">
+      <video ref={previewRef} className="hero-preview" autoPlay muted loop playsInline preload="metadata">
+        <source src={REEL} type="video/mp4"/>
+      </video>
+      <div className="hero-shade"/>
+      <div className="hero-copy"><div>
+        <h1>JUMP INTO MY <span>WORLD</span></h1>
+        <button className="reel-cta" onClick={playShowReel}>
+          <span className="play-ring"><Play size={25} fill="currentColor"/></span>
+          <span>PLAY SHOW REEL</span>
+        </button>
+      </div></div>
+      <button className="scroll-cue" onClick={()=>document.querySelector('#about')?.scrollIntoView({behavior:'smooth'})} aria-label="Scroll to About"><ChevronDown size={22}/></button>
+    </section>
+
+    {open&&<div className="reel-modal" role="dialog" aria-modal="true" aria-label="Show reel" onClick={closeReel}>
+      <button className="reel-close" onClick={closeReel} aria-label="Close reel"><X size={30}/></button>
+      <div className="reel-player" onClick={e=>e.stopPropagation()}>
+        <video ref={reelRef} controls playsInline>
+          <source src={REEL} type="video/mp4"/>
+        </video>
+      </div>
+    </div>}
+  </>;
+}
 function About(){return <AboutMe/>;}
 function CategoryCard({category,onOpen}){const cardRef=useRef(null);const onMove=e=>{const card=cardRef.current;if(!card)return;const rect=card.getBoundingClientRect();const x=(e.clientX-rect.left)/rect.width-.5;const y=(e.clientY-rect.top)/rect.height-.5;card.style.setProperty('--tilt-x',`${(-y*7).toFixed(2)}deg`);card.style.setProperty('--tilt-y',`${(x*9).toFixed(2)}deg`);card.style.setProperty('--lift','-7px');};const onLeave=()=>{const card=cardRef.current;if(!card)return;card.style.setProperty('--tilt-x','0deg');card.style.setProperty('--tilt-y','0deg');card.style.setProperty('--lift','0px');};return <button ref={cardRef} className="work-card work-category-card" onPointerMove={onMove} onPointerLeave={onLeave} onClick={()=>onOpen(category)} aria-label={`Open ${category.title}`}>{category.coverVideo?<video className="category-card-video" autoPlay muted loop playsInline preload="metadata"><source src={category.coverVideo} type="video/mp4"/></video>:<img src={category.image} alt=""/>}<div className="category-card-overlay"><span className="category-index">{category.id==='vfx'?'01':category.id==='product-viz'?'02':category.id==='hard-surface'?'03':'04'}</span><span className="work-label category-label">{category.title}</span><span className="category-subtitle">{category.subtitle}</span></div></button>;}
 function CategoryLibrary({category,onClose}){useEffect(()=>{const onKey=e=>e.key==='Escape'&&onClose();document.addEventListener('keydown',onKey);document.body.classList.add('modal-open');return()=>{document.removeEventListener('keydown',onKey);document.body.classList.remove('modal-open');};},[onClose]);const renderWorks=(works,keyPrefix)=><div className="category-work-grid">{works.map((work,index)=><article className="category-work-item" key={`${keyPrefix}-${index}`}>{work.video?<video className="category-work-video" controls playsInline preload="metadata" poster={work.image||undefined}><source src={work.video} type="video/mp4"/></video>:work.image?<img src={work.image} alt={work.title}/>:<div className="category-work-placeholder"><span>{String(index+1).padStart(2,'0')}</span><small>WORKPIECE</small></div>}<div className="category-work-caption"><span>{String(index+1).padStart(2,'0')}</span><strong>{work.title}</strong></div></article>)}</div>;return <div className="library-modal" onClick={onClose} role="dialog" aria-modal="true" aria-label={`${category.title} work library`}><div className="library-panel category-library-panel" onClick={e=>e.stopPropagation()}><button className="library-close" onClick={onClose} aria-label="Close library"><X size={28}/></button><p className="eyebrow">WORK CATEGORY</p><h3>{category.title}</h3><p className="category-library-description">{category.subtitle}</p>{category.subcategories?category.subcategories.map(sub=><section className="work-subcategory" key={sub.id}><div className="work-subcategory-heading"><span>SUB CATEGORY</span><h4>{sub.title}</h4><p>{sub.subtitle}</p></div>{renderWorks(sub.works,sub.id)}</section>):renderWorks(category.works,category.id)}</div></div>;}
