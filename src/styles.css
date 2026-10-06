@@ -298,3 +298,39 @@ h2{font-size:42px;line-height:1.08;letter-spacing:-.04em;font-weight:800}
   .nav{gap:0}
   .nav-links{flex:0 1 auto;justify-content:flex-end;padding-right:0}
 }
+
+
+/* Active navigation highlight */
+.nav-links a{
+  position:relative;
+}
+
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-7px;
+  width:0;
+  height:2px;
+  border-radius:999px;
+  background:#fff;
+  transform:translateX(-50%);
+  opacity:0;
+  transition:width .28s ease,opacity .28s ease;
+}
+
+.nav-links a.nav-active{
+  opacity:1;
+  color:#fff;
+}
+
+.nav-links a.nav-active::after{
+  width:100%;
+  opacity:1;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .nav-links a::after{
+    transition:none;
+  }
+}
