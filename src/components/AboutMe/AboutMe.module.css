@@ -130,7 +130,7 @@
   top: 50%;
   transform: translateY(-50%) rotate(-38deg);
   transform-origin: center;
-  opacity: .22;
+  opacity: .8;
   filter: saturate(.45) brightness(.55);
   pointer-events: none;
   overflow: visible;
