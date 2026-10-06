@@ -24,7 +24,8 @@ const WORK_CATEGORIES = [
   ], works: []},
   { id: 'motion', title: '3D Animation', subtitle: 'Character animation, walk cycles & motion studies', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif', works: [
     { title: 'Walk Cycle', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif' },
-    { title: 'TOBY0001', video: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/animation/TOBY0001.mp4' }
+    { title: 'TOBY0001', video: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/animation/TOBY0001.mp4' },
+    { title: 'Animation - Product Promo', video: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/animation/Animation%20-%20product%20promo.mp4' }
   ]},
 ];
 
