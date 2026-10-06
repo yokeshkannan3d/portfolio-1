@@ -169,3 +169,40 @@ h2{font-size:42px;line-height:1.08;letter-spacing:-.04em;font-weight:800}
 
 /* Milestone logo treatment */
 .milestone-item .milestone-logo{width:54px;height:54px;min-width:54px;object-fit:contain;flex:0 0 54px;border-radius:0;background:transparent;display:block;}
+
+
+/* Clean social logo row below Get in Touch */
+.contact-links{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  align-items:center;
+  margin-top:0;
+}
+.contact-links a{
+  min-height:72px;
+  display:grid;
+  place-items:center;
+  color:#eee;
+  transition:transform .2s ease,opacity .2s ease;
+}
+.contact-links a:hover{
+  transform:translateY(-3px);
+  opacity:.86;
+}
+.contact-logo{
+  width:36px;
+  height:36px;
+  display:block;
+  flex:0 0 36px;
+}
+.theme-light .contact-links a{color:#111}
+
+@media(max-width:700px){
+  .contact-links a{min-height:64px}
+  .contact-logo{
+    width:32px;
+    height:32px;
+    flex-basis:32px;
+  }
+}
