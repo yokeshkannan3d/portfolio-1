@@ -82,9 +82,6 @@ export default function AboutMe({ slides = SLIDES }) {
         </p>
 
         <div className={styles["am-stage"]}>
-          <div className={styles["am-echo"]} aria-hidden="true">
-            <Strip slides={slides} />
-          </div>
           <Strip slides={slides} />
         </div>
       </div>
