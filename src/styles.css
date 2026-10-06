@@ -232,3 +232,65 @@ h2{font-size:42px;line-height:1.08;letter-spacing:-.04em;font-weight:800}
     filter:none;
   }
 }
+
+
+/* Portfolio motion system */
+.reveal-section{
+  opacity:0;
+  transform:translateY(34px);
+  transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);
+  will-change:opacity,transform;
+}
+.reveal-section.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Cursor-driven 3D tilt + media zoom for work cards */
+.work-category-card{
+  --tilt-x:0deg;
+  --tilt-y:0deg;
+  --lift:0px;
+  transform:perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(var(--lift));
+  transform-style:preserve-3d;
+  transition:transform .16s ease,border-color .3s ease,box-shadow .3s ease;
+  will-change:transform;
+}
+.work-category-card:hover{
+  transform:perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(var(--lift));
+  box-shadow:0 22px 48px rgba(0,0,0,.32);
+}
+.work-category-card>img,
+.work-category-card>.category-card-video{
+  transition:transform .65s cubic-bezier(.2,.7,.2,1),filter .45s ease;
+  transform:scale(1.001);
+}
+.work-category-card:hover>img,
+.work-category-card:hover>.category-card-video{
+  transform:scale(1.07);
+}
+
+/* Draw the milestone divider when the section reveals */
+.milestone-item + .milestone-item::before{
+  transform:scaleY(0);
+  transform-origin:top;
+  transition:transform .75s cubic-bezier(.2,.75,.2,1) .28s,background .25s ease;
+}
+.milestones.is-visible .milestone-item + .milestone-item::before{
+  transform:scaleY(1);
+}
+.milestone-item{
+  transition:transform .28s ease,background-color .28s ease;
+}
+.milestone-item:hover{
+  transform:translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal-section{opacity:1;transform:none;transition:none}
+  .work-category-card,.work-category-card:hover{transform:none!important;transition:none}
+  .work-category-card>img,.work-category-card>.category-card-video,
+  .work-category-card:hover>img,.work-category-card:hover>.category-card-video{transform:none;transition:none}
+  .milestone-item + .milestone-item::before{transform:scaleY(1);transition:none}
+  .milestone-item:hover{transform:none}
+}
