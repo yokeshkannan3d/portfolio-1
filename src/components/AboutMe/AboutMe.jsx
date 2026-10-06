@@ -51,10 +51,6 @@ function Strip({ slides }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const slideCount = slides.length;
   const activeSlide = slides[activeIndex] ?? slides[0];
-  const previousIndex = slideCount > 0
-    ? (activeIndex - 1 + slideCount) % slideCount
-    : 0;
-  const previousSlide = slides[previousIndex];
 
   useEffect(() => {
     if (slideCount <= 1) return undefined;
@@ -77,32 +73,19 @@ function Strip({ slides }) {
       <Sprockets />
       <RightBoxes />
 
-      <ul className={styles["am-frames"]} aria-label="About me slideshow">
-        <li
-          className={`${styles["am-frame"]} ${styles["am-ghost"]}`}
-          aria-hidden="true"
-        >
-          {previousSlide?.src ? (
-            <img src={previousSlide.src} alt="" draggable="false" />
-          ) : (
-            <div className={styles["am-ph"]} />
-          )}
-        </li>
-
-        <li className={styles["am-frame"]}>
-          {activeSlide?.src ? (
-            <img
-              key={activeIndex}
-              className={styles["am-slide-image"]}
-              src={activeSlide.src}
-              alt={activeSlide.alt}
-              draggable="false"
-            />
-          ) : (
-            <div className={styles["am-ph"]} aria-hidden="true" />
-          )}
-        </li>
-      </ul>
+      <div className={styles["am-center-frame"]} aria-label="About me slideshow">
+        {activeSlide?.src ? (
+          <img
+            key={activeIndex}
+            className={styles["am-slide-image"]}
+            src={activeSlide.src}
+            alt={activeSlide.alt}
+            draggable="false"
+          />
+        ) : (
+          <div className={styles["am-ph"]} aria-hidden="true" />
+        )}
+      </div>
 
       <Sprockets />
     </div>
