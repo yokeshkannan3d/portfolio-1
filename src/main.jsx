@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { flushSync } from 'react-dom';
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, ChevronDown, Moon, Play, Sun, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown, Play, X } from 'lucide-react';
 import './styles.css';
 import './work-alignment.css';
 import './milestone-contact-alignment.css';
@@ -30,7 +30,7 @@ const WORK_CATEGORIES = [
   ]},
 ];
 
-function Nav({ theme, onToggleTheme }) { return <header className="nav"><a className="nav-logo" href="#top" aria-label="Yokesh Kannan home">YK</a><nav className="nav-links" aria-label="Primary navigation"><a href="#about">About</a><a href="#work">Work</a><a href="#milestones">Milestones</a><a href="#contact">Contact</a></nav><button className="theme-toggle" onClick={onToggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} title={theme === 'dark' ? 'Light mode' : 'Dark mode'}>{theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}<span>{theme === 'dark' ? 'LIGHT' : 'DARK'}</span></button></header>; }
+function Nav() { return <header className="nav"><a className="nav-logo" href="#top" aria-label="Yokesh Kannan home">YK</a><nav className="nav-links" aria-label="Primary navigation"><a href="#about">About</a><a href="#work">Work</a><a href="#milestones">Milestones</a><a href="#contact">Contact</a></nav></header>; }
 function Hero() {
   const [open,setOpen]=useState(false);
   const previewRef=useRef(null);
@@ -132,5 +132,5 @@ function Contact(){return <section id="contact" className="contact section-shell
     <svg className="contact-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm0 2A3.2 3.2 0 0 0 4 7.2v9.6A3.2 3.2 0 0 0 7.2 20h9.6a3.2 3.2 0 0 0 3.2-3.2V7.2A3.2 3.2 0 0 0 16.8 4H7.2Zm10.1 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
   </a>
 </div></div></section>;}
-function App(){const[theme,setTheme]=useState(()=>{try{return localStorage.getItem('portfolio-theme')||'dark';}catch{return'dark';}});useEffect(()=>{document.documentElement.dataset.theme=theme;try{localStorage.setItem('portfolio-theme',theme);}catch{}},[theme]);useEffect(()=>{const sections=document.querySelectorAll('.reveal-section');if(!('IntersectionObserver'in window)){sections.forEach(section=>section.classList.add('is-visible'));return undefined;}const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});},{threshold:.16,rootMargin:'0px 0px -8% 0px'});sections.forEach(section=>observer.observe(section));return()=>observer.disconnect();},[]);return <div className={`app theme-${theme}`}><Nav theme={theme} onToggleTheme={()=>setTheme(value=>value==='dark'?'light':'dark')}/><Hero/><About/><Work/><Milestones/><Contact/></div>;}
+function App(){useEffect(()=>{const sections=document.querySelectorAll('.reveal-section');if(!('IntersectionObserver'in window)){sections.forEach(section=>section.classList.add('is-visible'));return undefined;}const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});},{threshold:.16,rootMargin:'0px 0px -8% 0px'});sections.forEach(section=>observer.observe(section));return()=>observer.disconnect();},[]);return <div className="app"><Nav/><Hero/><About/><Work/><Milestones/><Contact/></div>;}
 createRoot(document.getElementById('root')).render(<App/>);
