@@ -125,7 +125,7 @@
 .am-diagonal {
   position: absolute;
   z-index: 0;
-  width: 59%;
+  width: 118%;
   left: 34%;
   top: 50%;
   transform: translateY(-50%) rotate(-38deg);
