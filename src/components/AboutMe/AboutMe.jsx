@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./AboutMe.module.css";
+import aboutMe1 from "../../../image.jpeg";
+import aboutMe2 from "../../../assets/about-me-2.jpg";
+import aboutMe3 from "../../../assets/about-me-3.jpg";
 
 const SLIDES = [
   {
