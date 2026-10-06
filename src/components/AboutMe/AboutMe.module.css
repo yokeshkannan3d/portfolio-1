@@ -188,7 +188,38 @@
 
 .am-diagonal .am-strip::before,
 .am-diagonal .am-strip::after {
-  display: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 22%;
+  z-index: 8;
+  pointer-events: none;
+  display: block;
+}
+
+.am-diagonal .am-strip::before {
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    #000 0%,
+    rgba(0,0,0,.96) 18%,
+    rgba(0,0,0,.72) 42%,
+    rgba(0,0,0,.36) 68%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+.am-diagonal .am-strip::after {
+  right: 0;
+  background: linear-gradient(
+    270deg,
+    #000 0%,
+    rgba(0,0,0,.96) 18%,
+    rgba(0,0,0,.72) 42%,
+    rgba(0,0,0,.36) 68%,
+    rgba(0,0,0,0) 100%
+  );
 }
 
 .am-diagonal .am-frames {
