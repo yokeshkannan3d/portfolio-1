@@ -16,7 +16,20 @@
 .am-text { position: relative; z-index: 2; margin: 0; font-size: clamp(16px, 2.1vw, 26px); line-height: 1.15; font-weight: 500; max-width: 28em; }
 .am-stage { position: relative; z-index: 0; margin-right: calc(-1 * clamp(20px, 9vw, 100px)); min-width: 0; isolation: isolate; }
 .am-stage > .am-strip { position: relative; z-index: 2; }
-.am-echo { position: absolute; inset: 0; z-index: 0; --sx: 1.3; --sy: 0.78; transform: rotate(-32deg) scale(var(--sx), var(--sy)); transform-origin: 50% 50%; opacity: 0.38; filter: blur(0.6px); pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 30%); mask-image: linear-gradient(90deg, transparent 0%, #000 30%); }
+.am-echo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  --sx: 1.08;
+  --sy: 1;
+  transform: translate(-7%, 10%) rotate(-18deg) scale(var(--sx), var(--sy));
+  transform-origin: 50% 50%;
+  opacity: 0.14;
+  filter: blur(1px) saturate(.55) brightness(.72);
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.45) 18%, #000 48%, rgba(0,0,0,.55) 78%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.45) 18%, #000 48%, rgba(0,0,0,.55) 78%, transparent 100%);
+}
 .am-echo .am-frames { overflow: hidden; }
 .am-echo .am-holes span { flex: 0 0 clamp(18px, 2.7vw, 38px); height: clamp(18px, 2.7vw, 36px); border-radius: 8px; }
 
@@ -65,15 +78,28 @@
 .am-ghost { position: absolute; top: 0; height: 100%; left: calc((100% - var(--frame-w)) / 2 - var(--frame-w) - var(--frame-gap)); opacity: 0.4; pointer-events: none; scroll-snap-align: none; -webkit-mask-image: linear-gradient(90deg, transparent, #000 90%); mask-image: linear-gradient(90deg, transparent, #000 90%); }
 .am-ph { width: 100%; height: 100%; background: linear-gradient(135deg, #3a3a3a, #1e1e1e); }
 
-.am-echo .am-strip { -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 35%, rgba(0,0,0,.5) 85%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, #000 35%, rgba(0,0,0,.5) 85%, transparent 100%); }
+.am-echo .am-strip {
+  background: #0b0b0b;
+  box-shadow: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 28%, rgba(0,0,0,.7) 72%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 28%, rgba(0,0,0,.7) 72%, transparent 100%);
+}
 
 /* Keep the rear strip's sprocket rows behind the main strip and prevent its squares from visually merging with the front row. */
-.am-echo .am-holes { display: none; }
+.am-echo .am-holes {
+  display: flex;
+  opacity: .22;
+}
 
 @media (max-width: 760px) {
   .am-grid { grid-template-columns: 1fr; gap: 32px; }
   .am-text { max-width: none; }
-  .am-echo { --sx: 1.2; --sy: 0.8; transform: rotate(-20deg) scale(var(--sx), var(--sy)); }
+  .am-echo {
+    --sx: 1.04;
+    --sy: 1;
+    transform: translate(-4%, 12%) rotate(-12deg) scale(var(--sx), var(--sy));
+    opacity: 0.11;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) { .am-frames { scroll-behavior: auto; } }
