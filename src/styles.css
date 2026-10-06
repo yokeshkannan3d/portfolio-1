@@ -206,3 +206,29 @@ h2{font-size:42px;line-height:1.08;letter-spacing:-.04em;font-weight:800}
     flex-basis:32px;
   }
 }
+
+
+/* Milestone icon hover animation */
+.milestone-item .milestone-logo{
+  transition:
+    transform .28s ease,
+    filter .28s ease,
+    opacity .28s ease;
+  transform-origin:center;
+}
+
+.milestone-item:hover .milestone-logo{
+  transform:translateY(-4px) scale(1.08) rotate(-2deg);
+  filter:drop-shadow(0 8px 18px rgba(255,255,255,.18));
+}
+
+@media (prefers-reduced-motion: reduce){
+  .milestone-item .milestone-logo{
+    transition:none;
+  }
+
+  .milestone-item:hover .milestone-logo{
+    transform:none;
+    filter:none;
+  }
+}
