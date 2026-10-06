@@ -41,10 +41,27 @@ function RightBoxes() {
   );
 }
 
+
+function getSideIndices(activeIndex, slideCount) {
+  const available = Array.from({ length: slideCount }, (_, index) => index)
+    .filter((index) => index !== activeIndex);
+
+  if (available.length === 0) return [activeIndex, activeIndex];
+  if (available.length === 1) return [available[0], available[0]];
+
+  if (Math.random() > 0.5) available.reverse();
+  return [available[0], available[1]];
+}
+
 function Strip({ slides }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const slideCount = slides.length;
   const activeSlide = slides[activeIndex] ?? slides[0];
+  const [[leftIndex, rightIndex], setSideIndices] = useState(() =>
+    getSideIndices(0, slideCount)
+  );
+  const leftSlide = slides[leftIndex] ?? slides[0];
+  const rightSlide = slides[rightIndex] ?? slides[0];
 
   useEffect(() => {
     if (slideCount <= 1) return undefined;
@@ -59,6 +76,11 @@ function Strip({ slides }) {
   useEffect(() => {
     if (activeIndex >= slideCount && slideCount > 0) {
       setActiveIndex(0);
+      return;
+    }
+
+    if (slideCount > 0) {
+      setSideIndices(getSideIndices(activeIndex, slideCount));
     }
   }, [activeIndex, slideCount]);
 
@@ -69,7 +91,11 @@ function Strip({ slides }) {
 
       <div className={styles["am-film-row"]}>
         <div className={`${styles["am-side-frame"]} ${styles["am-side-frame-left"]}`} aria-hidden="true">
-          <div className={styles["am-ph"]} />
+          {leftSlide?.src ? (
+            <img src={leftSlide.src} alt="" draggable="false" />
+          ) : (
+            <div className={styles["am-ph"]} />
+          )}
         </div>
 
         <div className={styles["am-center-frame"]} aria-label="About me slideshow">
@@ -87,7 +113,11 @@ function Strip({ slides }) {
         </div>
 
         <div className={`${styles["am-side-frame"]} ${styles["am-side-frame-right"]}`} aria-hidden="true">
-          <div className={styles["am-ph"]} />
+          {rightSlide?.src ? (
+            <img src={rightSlide.src} alt="" draggable="false" />
+          ) : (
+            <div className={styles["am-ph"]} />
+          )}
         </div>
       </div>
 
