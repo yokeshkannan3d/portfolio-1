@@ -1,10 +1,19 @@
+import { useEffect, useState } from "react";
 import styles from "./AboutMe.module.css";
 
-const IMAGE_SRC = "https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/image.jpeg";
-
 const SLIDES = [
-  { src: IMAGE_SRC, alt: "About me portfolio image" },
-  { src: IMAGE_SRC, alt: "About me portfolio image" },
+  {
+    src: "https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/image.jpeg",
+    alt: "About me portfolio image 1",
+  },
+  {
+    src: "https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/about-me-2.HEIC",
+    alt: "About me portfolio image 2",
+  },
+  {
+    src: "https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/about-me-3.HEIC",
+    alt: "About me portfolio image 3",
+  },
 ];
 
 const HOLES = 16;
@@ -39,27 +48,62 @@ function RightBoxes() {
 }
 
 function Strip({ slides }) {
-  const last = slides[slides.length - 1];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const slideCount = slides.length;
+  const activeSlide = slides[activeIndex] ?? slides[0];
+  const previousIndex = slideCount > 0
+    ? (activeIndex - 1 + slideCount) % slideCount
+    : 0;
+  const previousSlide = slides[previousIndex];
+
+  useEffect(() => {
+    if (slideCount <= 1) return undefined;
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % slideCount);
+    }, 3500);
+
+    return () => window.clearInterval(interval);
+  }, [slideCount]);
+
+  useEffect(() => {
+    if (activeIndex >= slideCount && slideCount > 0) {
+      setActiveIndex(0);
+    }
+  }, [activeIndex, slideCount]);
 
   return (
     <div className={styles["am-strip"]}>
       <Sprockets />
       <RightBoxes />
-      <ul className={styles["am-frames"]} aria-label="Photos">
-        <li className={`${styles["am-frame"]} ${styles["am-ghost"]}`} aria-hidden="true">
-          {last?.src ? <img src={last.src} alt="" draggable="false" /> : <div className={styles["am-ph"]} />}
+
+      <ul className={styles["am-frames"]} aria-label="About me slideshow">
+        <li
+          className={`${styles["am-frame"]} ${styles["am-ghost"]}`}
+          aria-hidden="true"
+        >
+          {previousSlide?.src ? (
+            <img src={previousSlide.src} alt="" draggable="false" />
+          ) : (
+            <div className={styles["am-ph"]} />
+          )}
         </li>
 
-        {slides.map((slide, index) => (
-          <li className={styles["am-frame"]} key={index}>
-            {slide.src ? (
-              <img src={slide.src} alt={slide.alt} draggable="false" />
-            ) : (
-              <div className={styles["am-ph"]} aria-hidden="true" />
-            )}
-          </li>
-        ))}
+        <li className={styles["am-frame"]}>
+          {activeSlide?.src ? (
+            <img
+              key={activeIndex}
+              className={styles["am-slide-image"]}
+              src={activeSlide.src}
+              alt={activeSlide.alt}
+              draggable="false"
+            />
+          ) : (
+            <div className={styles["am-ph"]} aria-hidden="true" />
+          )}
+        </li>
       </ul>
+
       <Sprockets />
     </div>
   );
