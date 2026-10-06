@@ -77,7 +77,7 @@
 
 /* Keep the rear strip's sprocket rows behind the main strip and prevent its squares from visually merging with the front row. */
 .am-echo .am-right-boxes { display: none; }
-.am-echo .am-holes { opacity: .72; }
+.am-echo .am-holes { display: none; }
 .am-stage > .am-strip .am-right-boxes { isolation: isolate; }
 
 @media (max-width: 760px) {
