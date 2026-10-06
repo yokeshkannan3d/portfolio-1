@@ -135,31 +135,43 @@
   pointer-events: none;
   overflow: visible;
 
-  /* No fade on the strip ends/sides. Only soften the long top and bottom edges. */
-  -webkit-mask-image: linear-gradient(
+  /* Keep the left/right sides fully sharp */
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* Fade only the long top/bottom edges, inset from the sides so the ends stay crisp */
+.am-diagonal::before,
+.am-diagonal::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 18%;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.am-diagonal::before {
+  top: 0;
+  background: linear-gradient(
     180deg,
-    transparent 0%,
-    rgba(0,0,0,.18) 5%,
-    rgba(0,0,0,.55) 10%,
-    rgba(0,0,0,.85) 15%,
-    #000 20%,
-    #000 80%,
-    rgba(0,0,0,.85) 85%,
-    rgba(0,0,0,.55) 90%,
-    rgba(0,0,0,.18) 95%,
+    #000 0%,
+    rgba(0,0,0,.86) 26%,
+    rgba(0,0,0,.50) 58%,
+    rgba(0,0,0,.18) 82%,
     transparent 100%
   );
-  mask-image: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(0,0,0,.18) 5%,
-    rgba(0,0,0,.55) 10%,
-    rgba(0,0,0,.85) 15%,
-    #000 20%,
-    #000 80%,
-    rgba(0,0,0,.85) 85%,
-    rgba(0,0,0,.55) 90%,
-    rgba(0,0,0,.18) 95%,
+}
+
+.am-diagonal::after {
+  bottom: 0;
+  background: linear-gradient(
+    0deg,
+    #000 0%,
+    rgba(0,0,0,.86) 26%,
+    rgba(0,0,0,.50) 58%,
+    rgba(0,0,0,.18) 82%,
     transparent 100%
   );
 }
