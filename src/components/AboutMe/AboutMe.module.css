@@ -233,3 +233,46 @@
   object-fit: cover;
   display: block;
 }
+
+
+/* True crossfade: all slideshow images stay stacked and blend between each other */
+.am-center-frame .am-slide-image{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  opacity:0;
+  transform:scale(1.025);
+  animation:none;
+  transition:opacity 900ms ease,transform 1200ms cubic-bezier(.2,.7,.2,1);
+  will-change:opacity,transform;
+}
+.am-center-frame .am-slide-active{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* Slow projector-like sprocket movement */
+.am-holes{
+  width:max-content;
+  min-width:100%;
+  animation:am-sprocket-drift 7s linear infinite alternate;
+  will-change:transform;
+}
+@keyframes am-sprocket-drift{
+  from{transform:translateX(-7px)}
+  to{transform:translateX(7px)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .am-center-frame .am-slide-image{
+    transition:none;
+    transform:none;
+  }
+  .am-holes{
+    animation:none;
+    transform:none;
+  }
+}
