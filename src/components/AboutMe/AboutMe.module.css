@@ -55,7 +55,7 @@
 
 .am-holes { display: flex; gap: clamp(8px, 1.1vw, 14px); padding-left: clamp(0px, 0.5vw, 8px); padding-right: calc(clamp(150px, 18vw, 250px) + clamp(10px, 1.6vw, 22px)); box-sizing: border-box; overflow: hidden; position: relative; z-index: 2; }
 .am-holes span { flex: 0 0 clamp(18px, 2.7vw, 38px); height: clamp(18px, 2.7vw, 36px); border-radius: 8px; }
-.am-holes span:nth-child(-n + 2) { opacity: 0.55; }
+.am-holes span:nth-child(-n + 2) { opacity: 0.55; }\n\n/* The final four squares are rendered by .am-right-boxes. Hide the duplicate sprockets. */\n.am-holes span:nth-child(n + 13) { display: none; }
 
 /* Extra squares live in their own non-overlapping right-side zone. */
 .am-right-boxes { position: absolute; top: clamp(10px, 1.6vw, 22px); right: clamp(10px, 1.6vw, 22px); bottom: clamp(10px, 1.6vw, 22px); width: clamp(150px, 18vw, 250px); z-index: 7; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; }
