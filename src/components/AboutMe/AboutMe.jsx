@@ -67,18 +67,28 @@ function Strip({ slides }) {
       <Sprockets />
       <RightBoxes />
 
-      <div className={styles["am-center-frame"]} aria-label="About me slideshow">
-        {activeSlide?.src ? (
-          <img
-            key={activeIndex}
-            className={styles["am-slide-image"]}
-            src={activeSlide.src}
-            alt={activeSlide.alt}
-            draggable="false"
-          />
-        ) : (
-          <div className={styles["am-ph"]} aria-hidden="true" />
-        )}
+      <div className={styles["am-film-row"]}>
+        <div className={`${styles["am-side-frame"]} ${styles["am-side-frame-left"]}`} aria-hidden="true">
+          <div className={styles["am-ph"]} />
+        </div>
+
+        <div className={styles["am-center-frame"]} aria-label="About me slideshow">
+          {activeSlide?.src ? (
+            <img
+              key={activeIndex}
+              className={styles["am-slide-image"]}
+              src={activeSlide.src}
+              alt={activeSlide.alt}
+              draggable="false"
+            />
+          ) : (
+            <div className={styles["am-ph"]} aria-hidden="true" />
+          )}
+        </div>
+
+        <div className={`${styles["am-side-frame"]} ${styles["am-side-frame-right"]}`} aria-hidden="true">
+          <div className={styles["am-ph"]} />
+        </div>
       </div>
 
       <Sprockets />
