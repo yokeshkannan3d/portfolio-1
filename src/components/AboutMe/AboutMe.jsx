@@ -68,6 +68,10 @@ function Strip({ slides }) {
 export default function AboutMe({ slides = SLIDES }) {
   return (
     <section className={styles["am"]} id="about">
+      <div className={styles["am-diagonal"]} aria-hidden="true">
+        <Strip slides={slides} />
+      </div>
+
       <h2 className={styles["am-title"]}>About me</h2>
 
       <div className={styles["am-grid"]}>
