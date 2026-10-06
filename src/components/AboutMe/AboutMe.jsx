@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import styles from "./AboutMe.module.css";
 import aboutMe2 from "../../../assets/slideshow/about-me-2.jpg";
 import aboutMe3 from "../../../assets/slideshow/about-me-3.jpg";
+import aboutMe1 from "../../../assets/slideshow/image.jpeg";
 
 const SLIDES = [
+  { src: aboutMe1, alt: "About me portfolio image 1" },
   { src: aboutMe2, alt: "About me portfolio image 2" },
   { src: aboutMe3, alt: "About me portfolio image 3" },
 ];
