@@ -22,7 +22,10 @@ const WORK_CATEGORIES = [
     ]},
     { id: 'car-models', title: 'Car Models', subtitle: 'Hard-surface vehicle modelling & detailing', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/car.jpg', works: [{ title: 'Car Model', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/car.jpg' }]}
   ], works: []},
-  { id: 'motion', title: '3D Animation', subtitle: 'Character animation, walk cycles & motion studies', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif', works: [{ title: 'Walk Cycle', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif' }]},
+  { id: 'motion', title: '3D Animation', subtitle: 'Character animation, walk cycles & motion studies', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif', works: [
+    { title: 'Walk Cycle', image: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/walk%20cycle.gif' },
+    { title: 'TOBY0001', video: 'https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/animation/TOBY0001.mp4' }
+  ]},
 ];
 
 function Nav({ theme, onToggleTheme }) { return <header className="nav"><a className="nav-logo" href="#top" aria-label="Yokesh Kannan home">YK</a><nav className="nav-links" aria-label="Primary navigation"><a href="#about">About</a><a href="#work">Work</a><a href="#milestones">Milestones</a><a href="#contact">Contact</a></nav><button className="theme-toggle" onClick={onToggleTheme} aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} title={theme === 'dark' ? 'Light mode' : 'Dark mode'}>{theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}<span>{theme === 'dark' ? 'LIGHT' : 'DARK'}</span></button></header>; }
