@@ -166,12 +166,16 @@
 
 .am-diagonal::after {
   bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28%;
   background: linear-gradient(
     0deg,
     #000 0%,
-    rgba(0,0,0,.86) 26%,
-    rgba(0,0,0,.50) 58%,
-    rgba(0,0,0,.18) 82%,
+    rgba(0,0,0,.98) 18%,
+    rgba(0,0,0,.82) 38%,
+    rgba(0,0,0,.52) 60%,
+    rgba(0,0,0,.22) 80%,
     transparent 100%
   );
 }
