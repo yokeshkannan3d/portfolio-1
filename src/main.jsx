@@ -173,7 +173,7 @@ function Contact(){return <section id="contact" className="contact section-shell
   <a href="mailto:yokeshkannan3d@gmail.com" aria-label="Gmail">
     <svg className="contact-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5.5h18c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H3c-.6 0-1-.4-1-1v-11c0-.6.4-1 1-1Zm9 7.1 8.1-5.4H3.9l8.1 5.4Zm0 2.4L4 9.7v6.8h16V9.7L12 15Z"/></svg>
   </a>
-  <a href="#" aria-label="Instagram">
+  <a href="https://www.instagram.com/yokeshkannan.3d/" target="_blank" rel="noreferrer" aria-label="Instagram">
     <svg className="contact-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.2 2h9.6A5.2 5.2 0 0 1 22 7.2v9.6a5.2 5.2 0 0 1-5.2 5.2H7.2A5.2 5.2 0 0 1 2 16.8V7.2A5.2 5.2 0 0 1 7.2 2Zm0 2A3.2 3.2 0 0 0 4 7.2v9.6A3.2 3.2 0 0 0 7.2 20h9.6a3.2 3.2 0 0 0 3.2-3.2V7.2A3.2 3.2 0 0 0 16.8 4H7.2Zm10.1 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
   </a>
 </div></div></section>;}
