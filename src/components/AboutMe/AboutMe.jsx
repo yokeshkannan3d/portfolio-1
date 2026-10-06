@@ -1,22 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./AboutMe.module.css";
-import aboutMe1 from "../../../image.jpeg";
-import aboutMe2 from "../../../assets/about-me-2.jpg";
-import aboutMe3 from "../../../assets/about-me-3.jpg";
+import aboutMe2 from "../../../assets/slideshow/about-me-2.jpg";
+import aboutMe3 from "../../../assets/slideshow/about-me-3.jpg";
 
 const SLIDES = [
-  {
-    src: "https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/image.jpeg",
-    alt: "About me portfolio image 1",
-  },
-  {
-    src: "https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/about-me-2.HEIC",
-    alt: "About me portfolio image 2",
-  },
-  {
-    src: "https://raw.githubusercontent.com/yokeshkannan3d/portfolio-1/main/assets/about-me-3.HEIC",
-    alt: "About me portfolio image 3",
-  },
+  { src: aboutMe2, alt: "About me portfolio image 2" },
+  { src: aboutMe3, alt: "About me portfolio image 3" },
 ];
 
 const HOLES = 16;
