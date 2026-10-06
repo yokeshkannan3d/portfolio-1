@@ -170,7 +170,7 @@ function Contact(){return <section id="contact" className="contact section-shell
   <a href="https://www.behance.net/yokeshkannan" target="_blank" rel="noreferrer" aria-label="Behance">
     <svg className="contact-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 4.5h6.2c3.1 0 5.1 1.1 5.1 4 0 1.6-.8 2.8-2.2 3.4 2 .6 3 2.1 3 4.2 0 3.3-2.8 4.8-5.8 4.8H3V4.5Zm3.6 6.6h2.9c1.3 0 2.2-.6 2.2-1.9 0-1.5-1.1-1.8-2.4-1.8H6.6v3.7Zm0 6.9h3c1.4 0 2.6-.5 2.6-2.1 0-1.7-1-2.3-2.6-2.3h-3V18ZM16.3 6h5.8v1.8h-5.8V6Zm6.4 8.1c-.2-3.3-2-5.6-5.3-5.6-3 0-5.5 2.3-5.5 6.3 0 3.9 2.3 6.2 5.5 6.2 2.5 0 4.3-1.1 5.2-3.7h-2.9c-.2.8-1.3 1.6-2.2 1.6-1.6 0-2.5-.8-2.6-2.7h7.8c.1-.4 0-1.4 0-2.1Zm-7.7-.1c.1-1 .7-2.3 2.3-2.3 1.2 0 2 .7 2.3 2.3H15Z"/></svg>
   </a>
-  <a href="mailto:yokeshkannan3d@gmail.com" aria-label="Gmail">
+  <a href="mailto:yokeshkannan3d@gmail.com?subject=Portfolio%20Inquiry&body=Hi%20Yokesh%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity%20with%20you.%0A%0ABest%2C" aria-label="Gmail">
     <svg className="contact-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5.5h18c.6 0 1 .4 1 1v11c0 .6-.4 1-1 1H3c-.6 0-1-.4-1-1v-11c0-.6.4-1 1-1Zm9 7.1 8.1-5.4H3.9l8.1 5.4Zm0 2.4L4 9.7v6.8h16V9.7L12 15Z"/></svg>
   </a>
   <a href="https://www.instagram.com/yokeshkannan.3d/" target="_blank" rel="noreferrer" aria-label="Instagram">
