@@ -128,7 +128,7 @@
   width: 118%;
   left: 34%;
   top: 50%;
-  transform: translateY(-50%) rotate(-70deg);
+  transform: translateY(-50%) rotate(-38deg);
   transform-origin: center;
   opacity:  1;
   filter: saturate(.45) brightness(.55);
@@ -168,7 +168,7 @@
     width: 150%;
     left: 12%;
     top: 57%;
-    transform: translateY(-50%) rotate(-64deg);
+    transform: translateY(-50%) rotate(-32deg);
     opacity: .16;
   }
 }
