@@ -119,3 +119,56 @@
 :global(.theme-light) .am-strip{background:#deded9;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 :global(.theme-light) .am-strip::before{background:linear-gradient(90deg,#f4f4f1 0%,#f4f4f1 12%,rgba(244,244,241,.96) 28%,rgba(244,244,241,.78) 48%,rgba(244,244,241,.34) 72%,rgba(244,244,241,0) 100%)}
 :global(.theme-light) .am-strip::after{background:linear-gradient(270deg,#f4f4f1 0%,#f4f4f1 12%,rgba(244,244,241,.92) 30%,rgba(244,244,241,.62) 52%,rgba(244,244,241,.24) 76%,rgba(244,244,241,0) 100%)}
+
+
+/* Decorative diagonal film strip behind the About section, matched to the reference */
+.am-diagonal {
+  position: absolute;
+  z-index: 0;
+  width: 118%;
+  left: 34%;
+  top: 50%;
+  transform: translateY(-50%) rotate(-38deg);
+  transform-origin: center;
+  opacity: .22;
+  filter: saturate(.45) brightness(.55);
+  pointer-events: none;
+  overflow: visible;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.45) 12%, #000 32%, #000 72%, rgba(0,0,0,.4) 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.45) 12%, #000 32%, #000 72%, rgba(0,0,0,.4) 90%, transparent 100%);
+}
+
+.am-diagonal .am-strip {
+  background: #0d0d0d;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.am-diagonal .am-strip::before,
+.am-diagonal .am-strip::after {
+  display: none;
+}
+
+.am-diagonal .am-frames {
+  overflow: hidden;
+}
+
+.am-diagonal .am-holes {
+  opacity: .4;
+}
+
+.am-title,
+.am-grid {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 760px) {
+  .am-diagonal {
+    width: 150%;
+    left: 12%;
+    top: 57%;
+    transform: translateY(-50%) rotate(-32deg);
+    opacity: .16;
+  }
+}
