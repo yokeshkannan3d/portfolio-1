@@ -131,7 +131,7 @@
   transform: translateY(-50%) rotate(-67deg);
   transform-origin: center;
   opacity: 1;
-  filter: saturate(.45) brightness(.55);
+  filter: saturate(.55) brightness(.72);
   pointer-events: none;
   overflow: visible;
 
