@@ -99,15 +99,16 @@ function Strip({ slides }) {
         </div>
 
         <div className={styles["am-center-frame"]} aria-label="About me slideshow">
-          {activeSlide?.src ? (
+          {slides.length ? slides.map((slide, index) => (
             <img
-              key={activeIndex}
-              className={styles["am-slide-image"]}
-              src={activeSlide.src}
-              alt={activeSlide.alt}
+              key={slide.src}
+              className={`${styles["am-slide-image"]} ${index === activeIndex ? styles["am-slide-active"] : ""}`}
+              src={slide.src}
+              alt={index === activeIndex ? slide.alt : ""}
+              aria-hidden={index !== activeIndex}
               draggable="false"
             />
-          ) : (
+          )) : (
             <div className={styles["am-ph"]} aria-hidden="true" />
           )}
         </div>
@@ -128,7 +129,7 @@ function Strip({ slides }) {
 
 export default function AboutMe({ slides = SLIDES }) {
   return (
-    <section className={styles["am"]} id="about">
+    <section className={`${styles["am"]} reveal-section`} id="about">
 <h2 className={styles["am-title"]}>About me</h2>
 
       <div className={styles["am-grid"]}>
