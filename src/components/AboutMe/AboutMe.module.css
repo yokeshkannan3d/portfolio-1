@@ -71,6 +71,17 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  /* Feather the neighboring images without softening the hero image. */
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.am-panel-left img {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.35) 22%, #000 72%, #000 100%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.35) 22%, #000 72%, #000 100%);
+}
+.am-panel-right img {
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,.35) 22%, #000 72%, #000 100%);
+  mask-image: linear-gradient(to left, transparent 0%, rgba(0,0,0,.35) 22%, #000 72%, #000 100%);
 }
 .am-panel-center {
   z-index: 4;
