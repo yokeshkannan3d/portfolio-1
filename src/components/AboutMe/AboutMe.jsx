@@ -10,38 +10,6 @@ const SLIDES = [
   { src: aboutMe3, alt: "About me portfolio image 3" },
 ];
 
-const HOLES = 16;
-
-const holeShade = (i) => {
-  const t = Math.min(1, i / (HOLES * 0.55));
-  const v = Math.round(70 + t * 160);
-  return `rgb(${v},${v},${v})`;
-};
-
-function Sprockets() {
-  return (
-    <div className={styles["am-holes"]} aria-hidden="true">
-      {Array.from({ length: HOLES }, (_, i) => (
-        <span key={i} style={{ background: holeShade(i) }} />
-      ))}
-    </div>
-  );
-}
-
-function RightBoxes() {
-  return (
-    <div className={styles["am-right-boxes"]} aria-hidden="true">
-      <div className={styles["am-right-box-row"]}>
-        {Array.from({ length: 4 }, (_, i) => <span key={`top-${i}`} />)}
-      </div>
-      <div className={`${styles["am-right-box-row"]} ${styles["am-right-box-row-bottom"]}`}>
-        {Array.from({ length: 4 }, (_, i) => <span key={`bottom-${i}`} />)}
-      </div>
-    </div>
-  );
-}
-
-
 function Strip({ slides }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const count = slides.length;
