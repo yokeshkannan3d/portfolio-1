@@ -34,9 +34,7 @@ function Strip({ slides }) {
   };
 
   return (
-    <div className={styles["am-strip"]}>
-      <Sprockets />
-      <RightBoxes />
+    <div className={styles["am-carousel"]}>
       <div className={styles["am-film-row"]} aria-label="About me slideshow">
         {slides.map((slide, index) => {
           const position = getPosition(index);
@@ -51,7 +49,6 @@ function Strip({ slides }) {
           );
         })}
       </div>
-      <Sprockets />
     </div>
   );
 }
