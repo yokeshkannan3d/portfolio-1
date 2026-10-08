@@ -42,86 +42,47 @@ function RightBoxes() {
 }
 
 
-function getSideIndices(activeIndex, slideCount) {
-  const available = Array.from({ length: slideCount }, (_, index) => index)
-    .filter((index) => index !== activeIndex);
-
-  if (available.length === 0) return [activeIndex, activeIndex];
-  if (available.length === 1) return [available[0], available[0]];
-
-  if (Math.random() > 0.5) available.reverse();
-  return [available[0], available[1]];
-}
-
 function Strip({ slides }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const slideCount = slides.length;
-  const activeSlide = slides[activeIndex] ?? slides[0];
-  const [[leftIndex, rightIndex], setSideIndices] = useState(() =>
-    getSideIndices(0, slideCount)
-  );
-  const leftSlide = slides[leftIndex] ?? slides[0];
-  const rightSlide = slides[rightIndex] ?? slides[0];
+  const count = slides.length;
 
   useEffect(() => {
-    if (slideCount <= 1) return undefined;
-
+    if (count <= 1) return undefined;
     const interval = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % slideCount);
+      setActiveIndex((current) => (current + 1) % count);
     }, 3500);
-
     return () => window.clearInterval(interval);
-  }, [slideCount]);
+  }, [count]);
 
-  useEffect(() => {
-    if (activeIndex >= slideCount && slideCount > 0) {
-      setActiveIndex(0);
-      return;
-    }
-
-    if (slideCount > 0) {
-      setSideIndices(getSideIndices(activeIndex, slideCount));
-    }
-  }, [activeIndex, slideCount]);
+  // Keep all images mounted so each panel can glide to its next position.
+  // The next slide enters from the right, while the previous one exits left.
+  const getPosition = (index) => {
+    if (count <= 1) return "center";
+    const offset = (index - activeIndex + count) % count;
+    if (offset === 0) return "center";
+    if (offset === 1) return "right";
+    if (offset === count - 1) return "left";
+    return "hidden";
+  };
 
   return (
     <div className={styles["am-strip"]}>
       <Sprockets />
       <RightBoxes />
-
-      <div className={styles["am-film-row"]}>
-        <div className={`${styles["am-side-frame"]} ${styles["am-side-frame-left"]}`} aria-hidden="true">
-          {leftSlide?.src ? (
-            <img src={leftSlide.src} alt="" draggable="false" />
-          ) : (
-            <div className={styles["am-ph"]} />
-          )}
-        </div>
-
-        <div className={styles["am-center-frame"]} aria-label="About me slideshow">
-          {slides.length ? slides.map((slide, index) => (
-            <img
+      <div className={styles["am-film-row"]} aria-label="About me slideshow">
+        {slides.map((slide, index) => {
+          const position = getPosition(index);
+          return (
+            <div
               key={slide.src}
-              className={`${styles["am-slide-image"]} ${index === activeIndex ? styles["am-slide-active"] : ""}`}
-              src={slide.src}
-              alt={index === activeIndex ? slide.alt : ""}
-              aria-hidden={index !== activeIndex}
-              draggable="false"
-            />
-          )) : (
-            <div className={styles["am-ph"]} aria-hidden="true" />
-          )}
-        </div>
-
-        <div className={`${styles["am-side-frame"]} ${styles["am-side-frame-right"]}`} aria-hidden="true">
-          {rightSlide?.src ? (
-            <img src={rightSlide.src} alt="" draggable="false" />
-          ) : (
-            <div className={styles["am-ph"]} />
-          )}
-        </div>
+              className={`${styles["am-panel"]} ${styles[`am-panel-${position}`]}`}
+              aria-hidden={position !== "center"}
+            >
+              <img src={slide.src} alt={position === "center" ? slide.alt : ""} draggable="false" />
+            </div>
+          );
+        })}
       </div>
-
       <Sprockets />
     </div>
   );
